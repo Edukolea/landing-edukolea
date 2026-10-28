@@ -1,12 +1,14 @@
 # EduKolea
 
-Primera landing en español para docentes y colegios. Next.js 16.4.3, React 19.3, App Router y TypeScript, con CSS Modules y variables de marca. No se añadieron dependencias. Se leyeron completos LANDING_BRIEF.md y SEO.md y las guías locales de exportación, metadata, robots, sitemap, iconos, imágenes y CSS antes de implementar.
+Primera landing en español para docentes y colegios. Next.js 16.4.3, React 19.3, App Router y TypeScript, con CSS Modules y variables de marca. Se añadió SweetAlert2 para las alertas accesibles y personalizadas del formulario. Se leyeron completos LANDING_BRIEF.md y SEO.md y las guías locales de exportación, metadata, robots, sitemap, iconos, imágenes y CSS antes de implementar.
 
 ## Desarrollo y verificación
 
-Revisión del 28 de octubre de 2026: se conservó el trabajo existente, el logo y la paleta. Se destacó AulaLista IA desde la portada, se adelantó su texto a la ilustración en móvil, se reforzaron las alternativas de contacto y se corrigieron el foco sobre fondo oscuro, el salto al contenido y el enlace que ahora despliega el aviso de privacidad. El formulario está habilitado con envío POST a FormSubmit, dirigido a contacto@edukolea.com; requiere activar el receptor desde ese buzón.
+Revisión del 28 de octubre de 2026: se conservaron el logo y la paleta, se renovaron portada y Servicios, y se añadieron Nosotros y Aliados. El formulario usa AJAX con SweetAlert2 y dirige las solicitudes a contacto@edukolea.com.
 
-Se verificó la exportación local en navegador a 1280 px y en móvil a 390 y 320 px, con navegación por teclado, cambios de servicio/medio. Esa revisión precede a la habilitación del formulario; los controles actuales se verifican con el script de exportación. Lint, build y los dos scripts de verificación finalizaron correctamente. Los recursos locales del HTML resuelven; `/`, robots, sitemap, favicon y OG responden 200 en la vista estática local. Esto no verifica recepción de mensajes, DNS, HTTPS ni publicación. Los pendientes de lanzamiento se detallan abajo.
+La exportación se revisó en navegador a 1280, 768, 390 y 320 px, sin desbordamiento horizontal ni imágenes faltantes. Se probaron preselección, detalles con toque y Enter, validación con foco al campo, cambios de canal y alertas simuladas de carga, recepción, activación y rechazo. Las respuestas simuladas conservaron los datos ante fallos y no navegaron fuera de la página. Lint, build y los tres scripts de verificación pasan.
+
+**Límite externo observado:** el intento real desde navegador no obtuvo confirmación; una comprobación HTTP directa al endpoint también agotó el límite de 20 segundos. La landing mostró error y conservó los datos. No se puede acreditar activación ni entrega al buzón desde este entorno; repetir la prueba desde el dominio publicado y confirmar el enlace de activación si FormSubmit lo solicita. No se modificaron DNS ni se publicó el sitio.
 
 ```sh
 npm ci
@@ -51,24 +53,35 @@ El destino preparado es **https://edukolea.com/** en la raíz; no se configuró 
 
 Referencias oficiales consultadas: [workflows para Pages](https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages) y [dominio personalizado](https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/managing-a-custom-domain-for-your-github-pages-site). Las guías específicas de Next.js están en `node_modules/next/dist/docs/`.
 
-## Recepción del formulario
+## Formulario AJAX y activación
 
-El formulario envía por POST a `https://formsubmit.co/contacto@edukolea.com`, compatible con la exportación estática y GitHub Pages. No requiere claves públicas ni privadas. El correo visible, los enlaces `mailto:` y el destinatario usan `contacto@edukolea.com`.
+El formulario usa `fetch` con JSON y POST a `https://formsubmit.co/ajax/contacto@edukolea.com`. No navega a FormSubmit. Requiere JavaScript; antes de la hidratación los campos están bloqueados para evitar envíos accidentales o datos personales en la URL. Sin JavaScript se ofrecen correo y WhatsApp.
 
-Se incluyen servicio, medio preferido, nombre, perfil, institución opcional y correo o teléfono según el medio elegido. Hay validación nativa, consentimiento obligatorio, un campo honeypot y reCAPTCHA habilitado en el proveedor. El visitante pasa a FormSubmit para completar la verificación y ver el resultado. No se muestra un éxito local ni se registra `generate_lead`: un clic o una navegación no prueban entrega al buzón. El formulario también permite enviar por correo sin JavaScript; el selector dinámico de WhatsApp requiere JavaScript y tiene un enlace directo alternativo.
+SweetAlert2 muestra validación, carga, recepción confirmada, activación pendiente y errores con los colores de EduKolea. La validación usa las restricciones HTML de los campos y lleva el foco al primer campo inválido al cerrar la alerta. Se exige consentimiento, se conserva un honeypot y no se desactiva la protección del proveedor. Se bloquean envíos duplicados con una referencia síncrona y campos deshabilitados. Hay un límite de 20 segundos; no se reintenta automáticamente, porque un timeout no prueba que el proveedor haya descartado la solicitud.
 
-### Activación y prueba de recepción
+La recepción solo se confirma con HTTP exitoso, JSON válido, `success` igual a `true` o `"true"` y un mensaje explícito de formulario enviado (`successfully submitted`). Los mensajes de activación o verificación se tratan por separado, incluso si incluyen `success: true`. Un 200 vacío, HTML, una respuesta desconocida o un rechazo nunca muestran éxito. Solo se limpian los campos tras ese acuse; errores y activación pendiente conservan los datos en la página. Los datos no se guardan en localStorage/sessionStorage ni se registran en analítica. No se emite `generate_lead`: el acuse del proveedor no acredita entrega al buzón.
 
-1. Publicar la exportación y enviar una solicitud de prueba desde el dominio público.
-2. Abrir el correo de activación de FormSubmit en **contacto@edukolea.com** (revisar spam) y confirmar el enlace. FormSubmit requiere esta confirmación para comenzar a reenviar solicitudes.
-3. Enviar otra solicitud y comprobar la recepción, los datos de todos los campos y la posibilidad de responder al correo del solicitante. Repetir con WhatsApp como medio preferido; los datos llegan al mismo buzón, no se envía un WhatsApp automático.
-4. Si falla el proveedor o no llega un mensaje, usar los enlaces directos de correo/WhatsApp y revisar la activación y spam.
+### Activación del correo receptor
 
-La compilación y las comprobaciones locales no verifican activación, existencia del buzón ni entrega real. No se ha realizado un envío externo de prueba en esta revisión.
+1. Publicar y enviar una solicitud de prueba desde `https://edukolea.com/`.
+2. El responsable de **contacto@edukolea.com** debe abrir el correo de activación de FormSubmit (revisar spam) y confirmar el enlace. Una alerta de SweetAlert2 no activa ni verifica el buzón.
+3. Enviar otra solicitud y comprobar en el buzón los datos y el Reply-To cuando el visitante elige correo. Repetir con WhatsApp como preferencia: la solicitud llega al mismo correo; no se envía un WhatsApp automático.
+4. Si hay un error o un corte de conexión, conservar los datos, revisar activación/conexión y reintentar; también están los enlaces directos.
 
-El aviso describe los datos enviados, su finalidad, el procesamiento mediante FormSubmit y el contacto para consultas o eliminación. Los datos personales no se guardan en sessionStorage ni se envían a analítica. El responsable debe completar los datos organizativos y la conservación de acuerdo con su operación antes del lanzamiento.
+El build y las pruebas simuladas no verifican DNS, existencia del buzón, activación ni entrega de correo. El aviso explica datos, finalidad, proveedor y contacto para consultas; el responsable debe completar los datos organizativos y la conservación según su operación.
 
-Documentación del receptor: [configuración de FormSubmit](https://formsubmit.co/documentation) y [activación y entrega](https://formsubmit.co/help).
+Documentación: [AJAX de FormSubmit](https://formsubmit.co/ajax-documentation), [activación](https://formsubmit.co/help) y [SweetAlert2](https://sweetalert2.github.io/).
+
+## Interacciones y comprobaciones
+
+- Servicios: tres tarjetas apiladas en escritorio; en móvil se muestran en flujo normal. Los detalles usan `details/summary`, operables con toque, Enter y Espacio. Cada CTA preselecciona su servicio y lleva el foco al selector. AulaLista IA está disponible para demo; las otras líneas conservan su alcance y disponibilidad por confirmar.
+- Nosotros: propósito y principios sin cifras ni logros inventados. Aliados: únicamente los tres PNG adjuntos, conservados sin alteraciones (OEA, AWS e Incuba Centro).
+- Las entradas usan IntersectionObserver; sin JavaScript el contenido sigue visible. La preferencia de movimiento reducido elimina entradas, animaciones, scroll suave y apilamiento fijo.
+- `node scripts/verify-demo.mjs`: contrato de respuesta, destinatario, payload, activación, JSON inválido, rechazos HTTP, errores de red y timeout sin solicitudes externas.
+- `node scripts/verify-export.mjs`: HTML, metadata, anclas, controles previos a hidratación, CTAs y los tres logos.
+- `node scripts/verify-measurement.mjs`: atribución permitida e instrumentación sin datos personales.
+
+Para reproducir los estados en navegador: ejecutar `node scripts/qa-preview.mjs` tras el build y abrir `http://localhost:3001/?qa=success#demo`. Las opciones son `success`, `activation`, `rejected`, `invalid-json`, `http-error`, `network-error` y `timeout`. El servidor inyecta respuestas simuladas solo al usar esos parámetros y muestra una etiqueta de prueba; nunca modifica `out/`. Sin `?qa=` sirve la exportación original con el receptor real. No publicar el servidor de QA.
 
 ## Medición sin datos personales
 

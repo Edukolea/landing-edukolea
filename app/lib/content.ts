@@ -1,5 +1,5 @@
 export const contactEmail = "contacto@edukolea.com";
-export const demoFormAction = `https://formsubmit.co/${contactEmail}`;
+export const demoFormAction = `https://formsubmit.co/ajax/${contactEmail}`;
 export const contacts = { email: `mailto:${contactEmail}`, whatsapp: "https://wa.me/51906815008" };
 export const services = [
   { slug: "aula_lista_ia", name: "AulaLista IA", title: "Empieza por la sesión de aprendizaje", description: "Crea sesiones de aprendizaje con apoyo de inteligencia artificial y adapta cada propuesta a las necesidades de tu aula.", status: "Disponible para demo" },
