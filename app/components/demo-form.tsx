@@ -1,0 +1,20 @@
+"use client";
+import { useEffect, useState } from "react";
+import { services, type ServiceSlug } from "../lib/content";
+import { measure, preserveCampaign } from "../lib/measurement";
+import { ContactLink } from "./actions";
+import styles from "./landing.module.css";
+export function DemoForm() {
+  const [method, setMethod] = useState("email");
+  useEffect(() => { preserveCampaign(); }, []);
+  return <section id="demo" className={`${styles.container} ${styles.demo}`} aria-labelledby="demo-title">
+    <div className={styles.demoIntro}><p className={styles.eyebrow}>03 / CONVERSEMOS</p><h2 id="demo-title">Solicita<br />una <span className={styles.serif}>demo.</span></h2><p>Cuéntanos quién eres y qué te interesa. Por ahora, contáctanos directamente para coordinar.</p><div className={styles.contactOptions}><ContactLink method="email">Escríbenos por correo</ContactLink><ContactLink method="whatsapp">Conversemos por WhatsApp</ContactLink></div><p className={styles.small}>Abrir estos enlaces no confirma una solicitud. Debes enviar tu mensaje en el canal elegido.</p></div>
+    <form className={styles.form} aria-label="Opciones para solicitar una demo" aria-describedby="form-status" onSubmit={(event) => event.preventDefault()}>
+      <div id="form-status" className={styles.formNotice}><strong>Solicitudes por correo o WhatsApp</strong><p>El formulario aún no recibe solicitudes. Los campos personales y el envío están desactivados. Usa los enlaces de contacto para coordinar tu demo.</p></div>
+      <p className={styles.small}>Puedes explorar las opciones de interés. Los campos con * serán obligatorios al habilitar el formulario.</p>
+      <div className={styles.field}><label htmlFor="service">Servicio de interés *</label><select id="service" name="service" required defaultValue="" onChange={(event) => { if (event.target.value) measure({ event: "service_interest_select", service_slug: event.target.value as ServiceSlug }); }}><option value="" disabled>Selecciona una línea educativa</option>{services.map(service => <option key={service.slug} value={service.slug}>{service.name} · nombre provisional</option>)}</select></div>
+      <div className={styles.field}><label htmlFor="contact-method">Medio de contacto preferido *</label><select id="contact-method" name="contact_method" value={method} onChange={event => setMethod(event.target.value)} required><option value="email">Correo electrónico</option><option value="whatsapp">WhatsApp</option></select></div>
+      <fieldset disabled className={styles.personalFields}><legend>Datos de contacto · pendientes de habilitar</legend><div className={styles.fieldRow}><div className={styles.field}><label htmlFor="name">Nombre *</label><input id="name" name="name" autoComplete="name" required placeholder="Tu nombre" /></div><div className={styles.field}><label htmlFor="profile">Perfil *</label><select id="profile" name="profile" required defaultValue=""><option value="" disabled>Selecciona tu perfil</option><option value="docente">Docente</option><option value="directivo">Directivo/a</option><option value="otro">Otro</option></select></div></div><div className={styles.field}><label htmlFor="institution">Institución <span>(opcional)</span></label><input id="institution" name="institution" autoComplete="organization" placeholder="Nombre de tu institución" /></div><div className={styles.field}><label htmlFor="contact">{method === "email" ? "Correo electrónico" : "Teléfono de WhatsApp"} *</label><input key={method} id="contact" name="contact" type={method === "email" ? "email" : "tel"} autoComplete={method === "email" ? "email" : "tel"} required placeholder={method === "email" ? "tu@correo.com" : "+51"} /></div></fieldset>
+      <p className={styles.small}>Consulta el <a href="#aviso-privacidad">aviso de privacidad</a>. No se recopilan datos mediante este formulario.</p><button type="submit" className={styles.button} disabled aria-describedby="form-status">Solicitar una demo <span aria-hidden="true">↗</span></button><noscript><p>Para coordinar una demo, usa los enlaces de correo o WhatsApp.</p></noscript>
+    </form></section>;
+}
