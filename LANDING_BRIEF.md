@@ -10,7 +10,7 @@
 - Público usuario: docentes. El colegio contrata; puede pagar el colegio o el docente.
 - Hay tres líneas de servicio. Solo el servicio de creación de sesiones con IA se puede entregar hoy.
 - Los tres servicios deben aparecer; la creación de sesiones es la prioridad visual y de contenido.
-- Contactos: `koedukoperu@gmail.com` y WhatsApp `+51 906 815 008`.
+- Contactos: `contacto@edukolea.com` y WhatsApp `+51 906 815 008`.
 - Alojamiento: GitHub Pages con el dominio propio.
 - Stack existente: Next.js 16.4.3, React 19.3, App Router, TypeScript y Tailwind CSS 4. Se pide arquitectura modular y no usar Tailwind como única solución de estilos.
 - Logo disponible: `public/logo/logoEdukolea.webp`. Conservar forma, proporciones y colores.
@@ -86,7 +86,7 @@ No afirmar que la demo es automática, inmediata o personalizada hasta confirmar
 **Botón:** Solicitar una demo  
 **Éxito solo tras confirmar recepción:** “¡Gracias! Recibimos tu solicitud. EduKolea se pondrá en contacto contigo por el medio que elegiste.”  
 **Error:** “No pudimos enviar la solicitud. Inténtalo de nuevo o contáctanos por correo o WhatsApp.”  
-**Contactos de respaldo:** `mailto:koedukoperu@gmail.com` y enlace `https://wa.me/51906815008`.
+**Contactos de respaldo:** `mailto:contacto@edukolea.com` y enlace `https://wa.me/51906815008`.
 
 ### 6. Pie
 
@@ -97,7 +97,7 @@ Enlaces: correo, WhatsApp y aviso de privacidad. El aviso y el texto de consenti
 
 1. Visitante llega desde red social; conservar UTM de origen durante el recorrido.
 2. Completa los campos mínimos y elige uno de los tres servicios.
-3. El formulario debe enviar los datos a un receptor verificado que notifique a `koedukoperu@gmail.com`; definir si WhatsApp es canal alterno o simultáneo.
+3. El formulario debe enviar los datos a un receptor verificado que notifique a `contacto@edukolea.com`; definir si WhatsApp es canal alterno o simultáneo.
 4. Mostrar confirmación solo cuando el receptor confirme el envío. El responsable de revisar y responder solicitudes aún debe nombrarse.
 5. En caso de error, ofrecer los dos enlaces directos de contacto.
 

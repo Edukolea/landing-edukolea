@@ -71,7 +71,7 @@ Se encontró una cifra contextual oficial, pero no una cifra localizada para Per
 ## Pendientes previos a publicación
 
 - Aprobar los tres nombres, textos, capacidades y estado de disponibilidad; precisar el entregable demostrable de AulaLista IA.
-- Elegir/configurar proveedor receptor del formulario, probar notificación a `koedukoperu@gmail.com`, decidir si WhatsApp será canal alterno o simultáneo y nombrar responsable de respuesta.
+- Elegir/configurar proveedor receptor del formulario, probar notificación a `contacto@edukolea.com`, decidir si WhatsApp será canal alterno o simultáneo y nombrar responsable de respuesta.
 - Confirmar host canónico (raíz o `www`), acceso a DNS/GitHub Pages y titular que verificará Search Console.
 - Crear propiedad GA4 si se medirá analítica, entregar Measurement ID y determinar consentimiento/privacidad aplicables. No existe volumen de keywords verificado.
 - Diseñar imagen Open Graph y validar favicon a partir de recursos de marca aprobados.
