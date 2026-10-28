@@ -146,6 +146,7 @@ export function Services() {
           {services.map((service, index) => (
             <article
               key={service.slug}
+              data-service-motion
               className={`${styles.servicePanel} ${styles[`panel${index}`]}`}
             >
               <div className={styles.serviceMeta}>

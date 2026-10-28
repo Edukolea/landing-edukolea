@@ -24,17 +24,31 @@ export function Motion({ children }: { children: ReactNode }) {
       element.dataset.revealState = "waiting";
       observer.observe(element);
     });
+    // Touch screens have no hover: play the same illustration transitions on entry.
+    const services = root.current?.querySelectorAll<HTMLElement>("[data-service-motion]") ?? [];
+    const serviceObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          (entry.target as HTMLElement).dataset.serviceActive = String(entry.isIntersecting);
+        });
+      },
+      { threshold: 0.25 },
+    );
+    services.forEach((element) => serviceObserver.observe(element));
     const showAll = () => {
       if (preference.matches) {
         elements.forEach((element) => {
           element.dataset.revealState = "visible";
         });
         observer.disconnect();
+        serviceObserver.disconnect();
+        services.forEach((element) => delete element.dataset.serviceActive);
       }
     };
     preference.addEventListener("change", showAll);
     return () => {
       observer.disconnect();
+      serviceObserver.disconnect();
       preference.removeEventListener("change", showAll);
     };
   }, []);
