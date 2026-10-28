@@ -1,9 +1,8 @@
 import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
-  output: "export",
   trailingSlash: true,
   images: { unoptimized: true },
-  // Static hosting has no runtime for Cache Components / partial prefetching.
+  // Pages can be prerendered; /api/contacto runs on Vercel's Node.js runtime.
   cacheComponents: false,
   partialPrefetching: false,
   experimental: { agentFeedback: true },

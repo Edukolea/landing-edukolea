@@ -17,8 +17,6 @@ import styles from "./landing.module.css";
 const subscribe = () => () => {};
 const isService = (value: unknown): value is ServiceSlug =>
   services.some((service) => service.slug === value);
-const activationHelp =
-  "El responsable de contacto@edukolea.com debe abrir el correo de activación de FormSubmit y confirmar su enlace (revisar también spam). Después, vuelve a intentar el envío. Esta alerta no activa el correo receptor.";
 
 function alerts() {
   return Swal.mixin({
@@ -105,10 +103,6 @@ export function DemoForm() {
           String(value).trim(),
         ]),
       );
-      fields.service = services.find((item) => item.slug === service)!.name;
-      fields._subject = "Nueva solicitud de demo · EduKolea";
-      fields._template = "table";
-      fields._url = "https://edukolea.com/";
       setBusy(true);
       setStatus("Enviando tu solicitud…");
       void dialog.fire({
@@ -119,19 +113,9 @@ export function DemoForm() {
         showConfirmButton: false,
         didOpen: () => Swal.showLoading(),
       });
-      const result = await sendDemoRequest(fields);
+      await sendDemoRequest(fields);
       setBusy(false);
-      if (result === "activation") {
-        setStatus(
-          "El correo receptor necesita activación. Tus datos se conservan para reintentar.",
-        );
-        await dialog.fire({
-          icon: "warning",
-          titleText: "Activación pendiente",
-          text: activationHelp,
-        });
-      } else {
-        setStatus("FormSubmit confirmó la recepción de tu solicitud.");
+        setStatus("El servidor de correo aceptó tu solicitud.");
         form.reset();
         setService("");
         setMethod("email");
@@ -140,10 +124,9 @@ export function DemoForm() {
         await dialog.fire({
           icon: "success",
           titleText: "¡Un paso más cerca de tu demo!",
-          text: "FormSubmit confirmó la recepción de tu solicitud. EduKolea se pondrá en contacto contigo por el medio que elegiste.",
+          text: "El servidor de correo aceptó tu solicitud. EduKolea se pondrá en contacto contigo por el medio que elegiste.",
           confirmButtonText: "Volver a EduKolea",
         });
-      }
     } catch {
       setBusy(false);
       setStatus(
@@ -339,12 +322,12 @@ export function DemoForm() {
             <input
               type="checkbox"
               name="consent"
-              value="Autorizo el uso de mis datos para coordinar la demo"
+              value="accepted"
               required
             />
             <span>
               Autorizo a EduKolea a usar estos datos para contactarme sobre mi
-              demo. El envío se procesa mediante FormSubmit. He leído el{" "}
+              demo. He leído el{" "}
               <a href="#aviso-privacidad">aviso de privacidad</a>. *
             </span>
           </label>

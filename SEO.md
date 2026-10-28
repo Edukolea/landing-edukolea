@@ -1,3 +1,5 @@
+> Actualización de implementación: el despliegue vigente es Next.js en Vercel con Nodemailer y la API /api/contacto/. Las referencias originales a GitHub Pages y receptor externo quedan como antecedente de planificación; consultar README.md para la configuración actual.
+
 # EduKolea: SEO y medición de lanzamiento
 
 ## Estado

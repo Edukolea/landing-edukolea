@@ -443,8 +443,8 @@ export function Footer() {
               solicitud y coordinar la demo por el medio que elijas.
             </p>
             <p>
-              El formulario se envía a FormSubmit, un proveedor externo que
-              procesa el envío y lo dirige a {contactEmail}. También puedes
+              El formulario se procesa en el servidor de EduKolea alojado en
+              Vercel y se envía mediante nuestro proveedor de correo a {contactEmail}. También puedes
               contactarnos directamente por correo o WhatsApp, servicios con sus
               propias condiciones de privacidad.
             </p>

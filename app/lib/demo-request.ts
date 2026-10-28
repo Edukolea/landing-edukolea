@@ -1,19 +1,13 @@
 import { demoFormAction } from "./content";
 
-export type DemoResult = "accepted" | "activation";
+export type DemoResult = "accepted";
 
-// A 200 response alone is not an acknowledgement. FormSubmit also returns
-// activation/rejection messages with HTTP 200 and string-valued success flags.
+// Only our server's explicit SMTP acknowledgement can confirm a submission.
 export function readDemoResponse(body: unknown): DemoResult {
   if (!body || typeof body !== "object") throw new Error("invalid-response");
-  const { success, message } = body as Record<string, unknown>;
-  if (typeof message !== "string" || !message.trim())
-    throw new Error("invalid-response");
-  if (/activat|verif|confirm.*(?:e-?mail)|(?:e-?mail).*confirm/i.test(message))
-    return "activation";
+  const { success, messageId } = body as Record<string, unknown>;
   if (
-    (success === true || success === "true") &&
-    /^(?:the )?form (?:was )?(?:successfully submitted|submitted successfully)[.!]?$/i.test(message.trim())
+    success === true && typeof messageId === "string" && messageId.trim().length > 0
   )
     return "accepted";
   throw new Error("unconfirmed-request");
@@ -22,7 +16,7 @@ export function readDemoResponse(body: unknown): DemoResult {
 export async function sendDemoRequest(
   fields: Record<string, string>,
   request: typeof fetch = fetch,
-  timeoutMs = 20_000,
+  timeoutMs = 45_000,
 ): Promise<DemoResult> {
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), timeoutMs);
@@ -35,7 +29,7 @@ export async function sendDemoRequest(
       },
       body: JSON.stringify(fields),
       signal: controller.signal,
-      credentials: "omit",
+      credentials: "same-origin",
       referrerPolicy: "strict-origin-when-cross-origin",
     });
     if (!response.ok) throw new Error("request-rejected");
