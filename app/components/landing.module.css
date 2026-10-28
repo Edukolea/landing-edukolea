@@ -96,6 +96,9 @@
 .personalFields { border: 0; padding: 0; margin: 25px 0 0; min-width: 0; }
 .personalFields legend { font-size: 11px; margin-bottom: 18px; }
 .form .button { width: 100%; }
+.honeypot { display: none; }
+.consent { display: flex; align-items: flex-start; gap: 10px; font-size: 12px; line-height: 1.6; margin-bottom: 24px; }
+.consent input { flex: 0 0 auto; width: 18px; height: 18px; margin-top: 2px; accent-color: var(--forest); }
 .footer { background: var(--forest); color: var(--paper); padding: 55px 0 24px; }
 .footerTop { display: flex; justify-content: space-between; gap: 30px; margin-bottom: 32px; }
 .footerTop p { margin: 16px 0 0; font-size: 13px; }
