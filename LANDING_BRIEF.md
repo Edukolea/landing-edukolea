@@ -1,3 +1,5 @@
+> Actualización de implementación: el despliegue vigente es Next.js en Vercel con Nodemailer y la API /api/contacto/. Las referencias originales a GitHub Pages y receptor externo quedan como antecedente de planificación; consultar README.md para la configuración actual.
+
 # EduKolea: brief de landing
 
 **Objetivo:** captar solicitudes de demo desde redes sociales y publicar una primera versión antes del viernes 30 de octubre de 2026. La meta operativa es publicar a más tardar el jueves 29.
