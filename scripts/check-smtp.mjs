@@ -9,7 +9,7 @@ try {
   await transport.verify();
   console.log("SMTP: DNS, TLS and authentication verified.");
   if (process.argv.includes("--send-test")) {
-    const result = await sendContactEmail({ name: "Prueba técnica EduKolea", profile: "otro", institution: "Verificación de Nodemailer", service: "aula_lista_ia", method: "email", contact: "contacto@edukolea.com" });
+    const result = await sendContactEmail({ name: "Prueba técnica EduKole", profile: "otro", institution: "Verificación de Nodemailer", service: "aula_lista_ia", method: "email", contact: "contacto@edukolea.com" });
     console.log(`SMTP test to contacto@edukolea.com: accepted=${result.accepted}, messageId=${Boolean(result.messageId)}. Check the inbox/spam to confirm delivery.`);
   }
 } catch (error) {

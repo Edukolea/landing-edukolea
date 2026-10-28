@@ -23,7 +23,7 @@ export function DemoLink({
         if (service) {
           event.preventDefault();
           window.dispatchEvent(
-            new CustomEvent("edukolea:select-service", { detail: service }),
+            new CustomEvent("edukole:select-service", { detail: service }),
           );
           document
             .getElementById("demo")

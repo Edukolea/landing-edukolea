@@ -5,7 +5,7 @@ type Event =
   | { event: "service_interest_select"; service_slug: "aula_lista_ia" | "kolea_en_pares" | "kolea_reporta" }
   | { event: "contact_outbound_click"; contact_method: "email" | "whatsapp" };
 export function measure(detail: Event) {
-  window.dispatchEvent(new CustomEvent("edukolea:measurement", { detail }));
+  window.dispatchEvent(new CustomEvent("edukole:measurement", { detail }));
 }
 const rules: Record<string, RegExp> = {
   utm_source: /^(instagram|facebook|tiktok|linkedin)$/,
@@ -23,7 +23,7 @@ export function preserveCampaign() {
       const value = params.get(key);
       if (value && rule.test(value)) campaign[key] = value;
     }
-    if (Object.keys(campaign).length) sessionStorage.setItem("edukolea:campaign", JSON.stringify(campaign));
+    if (Object.keys(campaign).length) sessionStorage.setItem("edukole:campaign", JSON.stringify(campaign));
   } catch { /* Storage is optional when the browser blocks it. */ }
 }
 // generate_lead deliberately has no emitter until a verified receiver exists.

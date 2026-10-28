@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import "./globals.css";
-const title = "EduKolea | Crea sesiones de aprendizaje con IA";
+const title = "EduKole | Crea sesiones de aprendizaje con IA";
 const description =
-  "Crea sesiones de aprendizaje con apoyo de IA. Conoce EduKolea en una demo para docentes y colegios.";
+  "Crea sesiones de aprendizaje con apoyo de IA. Conoce EduKole en una demo para docentes y colegios.";
 export const metadata: Metadata = {
   metadataBase: new URL("https://edukolea.com/"),
   title,
@@ -12,16 +12,16 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "es",
-    siteName: "EduKolea",
+    siteName: "EduKole",
     url: "https://edukolea.com/",
     title,
     description,
     images: [
       {
-        url: "/og-edukolea.png",
+        url: "/og-edukole.png",
         width: 1200,
         height: 630,
-        alt: "EduKolea. Crea sesiones de aprendizaje con apoyo de IA.",
+        alt: "EduKole. Crea sesiones de aprendizaje con apoyo de IA.",
       },
     ],
   },
@@ -29,7 +29,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title,
     description,
-    images: ["/og-edukolea.png"],
+    images: ["/og-edukole.png"],
   },
   icons: {
     icon: [

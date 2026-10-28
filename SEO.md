@@ -1,6 +1,6 @@
 > Actualización de implementación: el despliegue vigente es Next.js en Vercel con Nodemailer y la API /api/contacto/. Las referencias originales a GitHub Pages y receptor externo quedan como antecedente de planificación; consultar README.md para la configuración actual.
 
-# EduKolea: SEO y medición de lanzamiento
+# EduKole: SEO y medición de lanzamiento
 
 ## Estado
 
@@ -22,8 +22,8 @@ Mantener el contenido útil y específico. No crear páginas separadas por palab
 
 ## Metadatos y encabezados propuestos
 
-- **Title:** `EduKolea | Crea sesiones de aprendizaje con IA`
-- **Meta description:** `Crea sesiones de aprendizaje con apoyo de IA. Conoce EduKolea en una demo para docentes y colegios.`
+- **Title:** `EduKole | Crea sesiones de aprendizaje con IA`
+- **Meta description:** `Crea sesiones de aprendizaje con apoyo de IA. Conoce EduKole en una demo para docentes y colegios.`
 - **H1 único:** `Crea sesiones de aprendizaje con apoyo de IA`
 - **H2:** `Empieza por la sesión de aprendizaje`; `Conoce las otras líneas educativas`; `Conoce la propuesta en una demo`; `Solicita una demo`.
 - **Canónica:** `https://edukolea.com/` (decisión propuesta; confirmar que raíz sea el host preferido y redirigir `www` a raíz o viceversa).
@@ -38,7 +38,7 @@ El repo usa Next.js 16.4.3 con App Router. Antes de implementar, leer la guía l
 - **`robots.txt`:** permitir rastreo público y declarar `Sitemap: https://edukolea.com/sitemap.xml`. Entregar el archivo en la raíz pública; comprobarlo desde el host final.
 - **`sitemap.xml`:** incluir solo la URL canónica pública de la landing al inicio, sin URLs de preview/branch ni parámetros UTM. Generarlo como archivo estático o con la convención compatible de Next.js, confirmar que esté en `out/` y que responda bajo el dominio custom.
 - **GitHub Pages y dominio:** configurar dominio propio en Pages; para el apex `edukolea.com`, el proveedor DNS debe apuntar al servicio Pages (GitHub documenta registros A/AAAA o ALIAS/ANAME); configurar opcionalmente `www` con CNAME y elegir redirección. Añadir/verificar dominio antes de cambios DNS y activar HTTPS. Confirmar propagación y certificado antes de abrir indexación.
-- **Open Graph:** crear imagen OG de marca (sugerencia 1200×630 px), título y descripción en español; comprobar vista previa de enlaces en redes. Logo existente disponible: `public/logo/logoEdukolea.webp`; no distorsionarlo. Faltan creatividad OG e imágenes reales de producto.
+- **Open Graph:** crear imagen OG de marca (sugerencia 1200×630 px), título y descripción en español; comprobar vista previa de enlaces en redes. Logo existente disponible: `public/logo/logoEduKole.webp`; no distorsionarlo. Faltan creatividad OG e imágenes reales de producto.
 - **Favicon:** reemplazar el favicon de starter por un icono derivado del logo, conservando forma, proporciones y colores; comprobar legibilidad a tamaños pequeños y que la ruta servida sea la de marca.
 - **Optimización de imágenes:** servir imágenes locales comprimidas en WebP/AVIF cuando sea posible; declarar dimensiones, incluir `alt`, evitar fondos fotográficos pesados, cargar de forma prioritaria solo el recurso principal visible y lazy-load lo que quede bajo el primer viewport. No inventar capturas de producto.
 - **Verificación estática:** inspeccionar `out/index.html` para confirmar texto y metadata; comprobar links, códigos 200 de `/robots.txt` y `/sitemap.xml`, canonical, OG, favicon y URL raíz. Probar la URL pública con URL Inspection una vez desplegada. No asumir que el build local equivale a despliegue ni que enviar el sitemap garantiza indexación.
@@ -48,7 +48,7 @@ El repo usa Next.js 16.4.3 con App Router. Antes de implementar, leer la guía l
 1. En la cuenta Google del responsable, agregar propiedad de dominio `edukolea.com` (sin protocolo ni ruta) y verificarla con el TXT que indique Search Console en el proveedor DNS. Una propiedad de dominio incluye `www` y otros subdominios.
 2. Esperar publicación estable en `https://edukolea.com/`; validar la propiedad y usar Inspección de URL para probar la URL publicada y solicitar indexación si corresponde.
 3. En **Sitemaps**, enviar `https://edukolea.com/sitemap.xml`; revisar estado y problemas de cobertura/indexación después. El sitemap ayuda al descubrimiento, no garantiza indexación ni ranking.
-4. Revisar HTTPS, host canónico, `robots.txt`, URL canónica y ausencia de `noindex`; conservar acceso del responsable de EduKolea.
+4. Revisar HTTPS, host canónico, `robots.txt`, URL canónica y ausencia de `noindex`; conservar acceso del responsable de EduKole.
 
 ## UTM y eventos
 
@@ -68,7 +68,7 @@ No registrar como envío exitoso un clic en enviar, un `mailto:` ni solo abrir W
 
 ## Cifras para el contenido: límites de uso
 
-Se encontró una cifra contextual oficial, pero no una cifra localizada para Perú que justifique una promesa de ahorro o impacto. TALIS 2024 reporta que, en promedio entre sus sistemas educativos participantes, la planificación/preparación de lecciones representa 14% del tiempo de trabajo docente; el trabajo administrativo representa aproximadamente 6%. Perú no figura en la lista de los 55 sistemas participantes de esa edición. Por ello, no presentar estas cifras como datos peruanos ni como resultado de EduKolea. Recomendación de lanzamiento: omitirlas del hero; si se usa una en una sección editorial, atribuirla como referencia internacional con año, universo y enlace, y no sugerir que EduKolea ahorra ese tiempo.
+Se encontró una cifra contextual oficial, pero no una cifra localizada para Perú que justifique una promesa de ahorro o impacto. TALIS 2024 reporta que, en promedio entre sus sistemas educativos participantes, la planificación/preparación de lecciones representa 14% del tiempo de trabajo docente; el trabajo administrativo representa aproximadamente 6%. Perú no figura en la lista de los 55 sistemas participantes de esa edición. Por ello, no presentar estas cifras como datos peruanos ni como resultado de EduKole. Recomendación de lanzamiento: omitirlas del hero; si se usa una en una sección editorial, atribuirla como referencia internacional con año, universo y enlace, y no sugerir que EduKole ahorra ese tiempo.
 
 ## Pendientes previos a publicación
 

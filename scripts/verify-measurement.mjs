@@ -10,7 +10,7 @@ const storage = new Map();
 const emitted = [];
 globalThis.window = { location: { search: "" }, dispatchEvent: event => emitted.push(event.detail) };
 globalThis.sessionStorage = { setItem: (key, value) => storage.set(key, value) };
-const key = "edukolea:campaign";
+const key = "edukole:campaign";
 window.location.search = "?utm_source=instagram&utm_medium=organic_social&utm_campaign=lanzamiento_2026_10&utm_content=post_01&email=private@example.com&utm_term=secret";
 preserveCampaign();
 assert.deepEqual(JSON.parse(storage.get(key)), { utm_source: "instagram", utm_medium: "organic_social", utm_campaign: "lanzamiento_2026_10", utm_content: "post_01" });

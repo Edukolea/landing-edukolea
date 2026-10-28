@@ -21,12 +21,12 @@ export function smtpConfig(env: NodeJS.ProcessEnv = process.env) {
 export function contactMessage(input: ContactInput, sender: string) {
   const service = services.find(item => item.slug === input.service)!;
   return {
-    from: { name: "EduKolea", address: sender },
+    from: { name: "EduKole", address: sender },
     to: contactEmail,
     ...(input.method === "email" ? { replyTo: input.contact } : {}),
     subject: `Nueva solicitud de demo · ${service.name}`,
     text: [
-      "Nueva solicitud desde la landing de EduKolea", "",
+      "Nueva solicitud desde la landing de EduKole", "",
       `Nombre: ${input.name}`, `Perfil: ${input.profile}`,
       `Institución: ${input.institution || "No indicada"}`, `Servicio: ${service.name}`,
       `Medio preferido: ${input.method === "email" ? "Correo electrónico" : "WhatsApp"}`,

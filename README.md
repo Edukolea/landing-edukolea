@@ -1,4 +1,4 @@
-# EduKolea
+# EduKole
 
 Landing en español para docentes y colegios con Next.js 16.4.3, React 19.3, TypeScript y SweetAlert2. Se despliega como un único proyecto Next.js en Vercel: la página se prerenderiza y `/api/contacto/` funciona como Vercel Function con Node.js. No hace falta un VPS, Express ni un backend desplegado por separado.
 

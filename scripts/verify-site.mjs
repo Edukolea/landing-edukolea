@@ -19,10 +19,10 @@ assert.equal((html.match(/<h1\b/g) || []).length, 1, "Exactly one H1");
 for (const content of ["Crea sesiones de aprendizaje", "AulaLista IA", "Kolea en Pares", "Kolea Reporta", "nombre provisional", "contacto@edukolea.com"]) {
   assert.ok(html.includes(content), `Initial HTML contains ${content}`);
 }
-assert.match(html, /<title>EduKolea \| Crea sesiones de aprendizaje con IA<\/title>/);
+assert.match(html, /<title>EduKole \| Crea sesiones de aprendizaje con IA<\/title>/);
 assert.match(html, /<link rel="canonical" href="https:\/\/edukolea.com\/"/);
 assert.match(html, /<meta name="description" content="Crea sesiones/);
-assert.match(html, /<meta property="og:image" content="https:\/\/edukolea.com\/og-edukolea.png"/);
+assert.match(html, /<meta property="og:image" content="https:\/\/edukolea.com\/og-edukole.png"/);
 assert.match(html, /<meta name="robots" content="index, follow"/);
 assert.match(html, /<form[^>]*method="POST"/);
 assert.ok(!/<form[^>]*action=/.test(html), "Form submits through the same-origin API");
@@ -50,7 +50,7 @@ assert.ok(robots.includes("Sitemap: https://edukolea.com/sitemap.xml"));
 const sitemap = await resource("/sitemap.xml");
 assert.deepEqual([...sitemap.matchAll(/<loc>(.*?)<\/loc>/g)].map(match => match[1]), ["https://edukolea.com/"]);
 
-for (const file of ["favicon.ico", "brand-icon.png", "apple-touch-icon.png", "og-edukolea.png", "logo/logoEdukolea.webp", "aliados/oea.png", "aliados/aws.png", "aliados/incuba-centro.png"]) await resource(`/${file}`);
+for (const file of ["favicon.ico", "brand-icon.png", "apple-touch-icon.png", "og-edukole.png", "logo/logoEduKole.webp", "aliados/oea.png", "aliados/aws.png", "aliados/incuba-centro.png"]) await resource(`/${file}`);
 assert.ok(!html.includes("FormSubmit"), "No former provider in page copy");
 const endpoint = new URL("/api/contacto/", base);
 assert.equal((await fetch(endpoint)).status, 405);

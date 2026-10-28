@@ -27,9 +27,9 @@ function alerts() {
     buttonsStyling: false,
     heightAuto: false,
     customClass: {
-      popup: "edukolea-alert",
-      confirmButton: "edukolea-alert-button",
-      loader: "edukolea-alert-loader",
+      popup: "edukole-alert",
+      confirmButton: "edukole-alert-button",
+      loader: "edukole-alert-loader",
     },
     animation: !window.matchMedia("(prefers-reduced-motion: reduce)").matches,
   });
@@ -60,9 +60,9 @@ export function DemoForm() {
     choose(new URLSearchParams(window.location.search).get("servicio"));
     const onSelect = (event: Event) =>
       choose((event as CustomEvent<unknown>).detail);
-    window.addEventListener("edukolea:select-service", onSelect);
+    window.addEventListener("edukole:select-service", onSelect);
     return () =>
-      window.removeEventListener("edukolea:select-service", onSelect);
+      window.removeEventListener("edukole:select-service", onSelect);
   }, []);
 
   async function submit(event: FormEvent<HTMLFormElement>) {
@@ -124,8 +124,8 @@ export function DemoForm() {
         await dialog.fire({
           icon: "success",
           titleText: "¡Un paso más cerca de tu demo!",
-          text: "El servidor de correo aceptó tu solicitud. EduKolea se pondrá en contacto contigo por el medio que elegiste.",
-          confirmButtonText: "Volver a EduKolea",
+          text: "El servidor de correo aceptó tu solicitud. EduKole se pondrá en contacto contigo por el medio que elegiste.",
+          confirmButtonText: "Volver a EduKole",
         });
     } catch {
       setBusy(false);
@@ -326,7 +326,7 @@ export function DemoForm() {
               required
             />
             <span>
-              Autorizo a EduKolea a usar estos datos para contactarme sobre mi
+              Autorizo a EduKole a usar estos datos para contactarme sobre mi
               demo. He leído el{" "}
               <a href="#aviso-privacidad">aviso de privacidad</a>. *
             </span>
