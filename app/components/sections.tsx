@@ -77,7 +77,7 @@ export function Hero() {
         <div className={styles.artOrbit} aria-hidden="true" />
         <div className={styles.logoFrame}>
           <Image
-            src="/logo/logoEdukolea.webp"
+            src="/logo/logomain.png"
             alt="Koala de EduKolea sobre una hoja verde"
             width={320}
             height={320}
