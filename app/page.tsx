@@ -2,10 +2,13 @@ import {
   Header,
   Hero,
   Services,
+  About,
+  Allies,
   DemoSteps,
   Footer,
 } from "./components/sections";
 import { DemoForm } from "./components/demo-form";
+import { Motion } from "./components/motion";
 
 export default function Home() {
   return (
@@ -15,10 +18,12 @@ export default function Home() {
       </a>
       <Header />
       <main id="contenido" tabIndex={-1}>
-        <Hero />
+        <Motion><Hero />
         <Services />
+        <About />
+        <Allies />
         <DemoSteps />
-        <DemoForm />
+        <DemoForm /></Motion>
       </main>
       <Footer />
     </>

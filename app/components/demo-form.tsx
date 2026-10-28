@@ -1,25 +1,385 @@
 "use client";
-import { useEffect, useState } from "react";
-import { demoFormAction, services, type ServiceSlug } from "../lib/content";
+
+import {
+  useEffect,
+  useRef,
+  useState,
+  useSyncExternalStore,
+  type FormEvent,
+} from "react";
+import Swal from "sweetalert2";
+import { services, type ServiceSlug } from "../lib/content";
+import { sendDemoRequest } from "../lib/demo-request";
 import { measure, preserveCampaign } from "../lib/measurement";
 import { ContactLink } from "./actions";
 import styles from "./landing.module.css";
+
+const subscribe = () => () => {};
+const isService = (value: unknown): value is ServiceSlug =>
+  services.some((service) => service.slug === value);
+const activationHelp =
+  "El responsable de contacto@edukolea.com debe abrir el correo de activación de FormSubmit y confirmar su enlace (revisar también spam). Después, vuelve a intentar el envío. Esta alerta no activa el correo receptor.";
+
+function alerts() {
+  return Swal.mixin({
+    background: "#f6faf2",
+    color: "#364e48",
+    iconColor: "#364e48",
+    confirmButtonText: "Entendido",
+    buttonsStyling: false,
+    heightAuto: false,
+    customClass: {
+      popup: "edukolea-alert",
+      confirmButton: "edukolea-alert-button",
+      loader: "edukolea-alert-loader",
+    },
+    animation: !window.matchMedia("(prefers-reduced-motion: reduce)").matches,
+  });
+}
+
 export function DemoForm() {
   const [method, setMethod] = useState("email");
-  useEffect(() => { preserveCampaign(); }, []);
-  return <section id="demo" className={`${styles.container} ${styles.demo}`} aria-labelledby="demo-title">
-    <div className={styles.demoIntro}><p className={styles.eyebrow}>03 / CONVERSEMOS</p><h2 id="demo-title">Solicita<br />una <span className={styles.serif}>demo.</span></h2><p>Cuéntanos quién eres y qué te interesa. Te contactaremos por el medio que elijas.</p><div className={styles.contactOptions}><ContactLink method="email">Escríbenos por correo</ContactLink><ContactLink method="whatsapp">Conversemos por WhatsApp</ContactLink></div><p className={styles.small}>También puedes escribirnos directamente para coordinar tu demo.</p></div>
-    <form className={styles.form} action={demoFormAction} method="POST" aria-label="Solicitar una demo" aria-describedby="form-status">
-      <input type="hidden" name="_subject" value="Nueva solicitud de demo · EduKolea" />
-      <input type="hidden" name="_template" value="table" />
-      <input type="hidden" name="_url" value="https://edukolea.com/" />
-      <input type="text" name="_honey" tabIndex={-1} autoComplete="off" className={styles.honeypot} aria-hidden="true" />
-      <div id="form-status" className={styles.formNotice}><strong>Recibe información sobre tu demo</strong><p>Al enviar, irás a FormSubmit para completar la verificación de seguridad y consultar el resultado del envío. Si no puedes completarlo, escríbenos por correo o WhatsApp.</p></div>
-      <p className={styles.small}>Los campos con * son obligatorios.</p>
-      <div className={styles.field}><label htmlFor="service">Servicio de interés *</label><select id="service" name="service" required defaultValue="" onChange={(event) => { if (event.target.value) measure({ event: "service_interest_select", service_slug: event.target.value as ServiceSlug }); }}><option value="" disabled>Selecciona una línea educativa</option>{services.map(service => <option key={service.slug} value={service.slug}>{service.name} · nombre provisional</option>)}</select></div>
-      <div className={styles.field}><label htmlFor="contact-method">Medio de contacto preferido *</label><select id="contact-method" name="contact_method" value={method} onChange={event => setMethod(event.target.value)} required><option value="email">Correo electrónico</option><option value="whatsapp">WhatsApp</option></select></div>
-      <fieldset className={styles.personalFields}><legend>Datos de contacto</legend><div className={styles.fieldRow}><div className={styles.field}><label htmlFor="name">Nombre *</label><input id="name" name="name" autoComplete="name" required maxLength={120} pattern=".*\S.*" placeholder="Tu nombre" /></div><div className={styles.field}><label htmlFor="profile">Perfil *</label><select id="profile" name="profile" required defaultValue=""><option value="" disabled>Selecciona tu perfil</option><option value="docente">Docente</option><option value="directivo">Directivo/a</option><option value="otro">Otro</option></select></div></div><div className={styles.field}><label htmlFor="institution">Institución <span>(opcional)</span></label><input id="institution" name="institution" autoComplete="organization" maxLength={200} placeholder="Nombre de tu institución" /></div><div className={styles.field}><label htmlFor="contact">{method === "email" ? "Correo electrónico" : "Teléfono de WhatsApp"} *</label><input key={method} id="contact" name={method === "email" ? "email" : "phone"} type={method === "email" ? "email" : "tel"} autoComplete={method === "email" ? "email" : "tel"} required maxLength={method === "email" ? 254 : 30} pattern={method === "whatsapp" ? "[+]?[0-9][0-9 \\(\\)\\-]{6,28}[0-9]" : undefined} title={method === "whatsapp" ? "Incluye el código de país y entre 8 y 30 caracteres, por ejemplo +51 906 815 008." : undefined} placeholder={method === "email" ? "tu@correo.com" : "+51 906 815 008"} /></div></fieldset>
-      <label className={styles.consent}><input type="checkbox" name="consent" value="Autorizo el uso de mis datos para coordinar la demo" required /><span>Autorizo a EduKolea a usar estos datos para contactarme sobre mi demo. El envío se procesa mediante FormSubmit. He leído el <a href="#aviso-privacidad">aviso de privacidad</a>. *</span></label>
-      <button type="submit" className={styles.button} aria-describedby="form-status">Solicitar una demo <span aria-hidden="true">↗</span></button><noscript><p>Puedes enviar tu solicitud con correo electrónico. Para WhatsApp, usa el enlace de contacto directo.</p></noscript>
-    </form></section>;
+  const [service, setService] = useState<ServiceSlug | "">("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [busy, setBusy] = useState(false);
+  const [status, setStatus] = useState("");
+  const locked = useRef(false);
+  const ready = useSyncExternalStore(
+    subscribe,
+    () => true,
+    () => false,
+  );
+
+  useEffect(() => {
+    preserveCampaign();
+    const choose = (value: unknown) => {
+      if (isService(value)) {
+        setService(value);
+        measure({ event: "service_interest_select", service_slug: value });
+      }
+    };
+    choose(new URLSearchParams(window.location.search).get("servicio"));
+    const onSelect = (event: Event) =>
+      choose((event as CustomEvent<unknown>).detail);
+    window.addEventListener("edukolea:select-service", onSelect);
+    return () =>
+      window.removeEventListener("edukolea:select-service", onSelect);
+  }, []);
+
+  async function submit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    if (locked.current) return;
+    locked.current = true;
+    const form = event.currentTarget;
+    const dialog = alerts();
+    try {
+      const invalid = Array.from(form.elements).find(
+        (element) =>
+          (element instanceof HTMLInputElement ||
+            element instanceof HTMLSelectElement) &&
+          !element.validity.valid,
+      ) as HTMLInputElement | HTMLSelectElement | undefined;
+      if (invalid) {
+        const label =
+          invalid.labels?.[0]?.textContent?.replace(/\s*\*\s*$/, "").trim() ||
+          "el campo señalado";
+        await dialog.fire({
+          icon: "info",
+          titleText: "Revisa tus datos",
+          text:
+            invalid.type === "checkbox"
+              ? "Necesitamos tu autorización para contactarte sobre la demo."
+              : `Completa ${label} con un valor válido.${invalid.title ? ` ${invalid.title}` : ""}`,
+          confirmButtonText: "Revisar campo",
+          returnFocus: false,
+        });
+        invalid.focus();
+        return;
+      }
+      const data = new FormData(form);
+      if (String(data.get("_honey") || "")) return;
+      const fields = Object.fromEntries(
+        Array.from(data.entries(), ([key, value]) => [
+          key,
+          String(value).trim(),
+        ]),
+      );
+      fields.service = services.find((item) => item.slug === service)!.name;
+      fields._subject = "Nueva solicitud de demo · EduKolea";
+      fields._template = "table";
+      fields._url = "https://edukolea.com/";
+      setBusy(true);
+      setStatus("Enviando tu solicitud…");
+      void dialog.fire({
+        titleText: "Conectando con tu próxima demo",
+        text: "Estamos enviando tu solicitud. Espera un momento.",
+        allowOutsideClick: false,
+        allowEscapeKey: false,
+        showConfirmButton: false,
+        didOpen: () => Swal.showLoading(),
+      });
+      const result = await sendDemoRequest(fields);
+      setBusy(false);
+      if (result === "activation") {
+        setStatus(
+          "El correo receptor necesita activación. Tus datos se conservan para reintentar.",
+        );
+        await dialog.fire({
+          icon: "warning",
+          titleText: "Activación pendiente",
+          text: activationHelp,
+        });
+      } else {
+        setStatus("FormSubmit confirmó la recepción de tu solicitud.");
+        form.reset();
+        setService("");
+        setMethod("email");
+        setEmail("");
+        setPhone("");
+        await dialog.fire({
+          icon: "success",
+          titleText: "¡Un paso más cerca de tu demo!",
+          text: "FormSubmit confirmó la recepción de tu solicitud. EduKolea se pondrá en contacto contigo por el medio que elegiste.",
+          confirmButtonText: "Volver a EduKolea",
+        });
+      }
+    } catch {
+      setBusy(false);
+      setStatus(
+        "No pudimos confirmar el envío. Tus datos siguen aquí para reintentar.",
+      );
+      await dialog.fire({
+        icon: "error",
+        titleText: "No pudimos confirmar el envío",
+        text: "Revisa tu conexión y vuelve a intentarlo. Si el problema continúa, escribe a contacto@edukolea.com o usa WhatsApp. Conservamos tus datos en el formulario; si hubo un corte de conexión, comprueba antes si ya recibiste respuesta.",
+        confirmButtonText: "Volver al formulario",
+      });
+    } finally {
+      locked.current = false;
+      setBusy(false);
+    }
+  }
+
+  return (
+    <section
+      id="demo"
+      className={`${styles.container} ${styles.demo}`}
+      aria-labelledby="demo-title"
+    >
+      <div className={styles.demoIntro} data-reveal>
+        <p className={styles.eyebrow}>05 / CONVERSEMOS</p>
+        <h2 id="demo-title">
+          Tu próxima
+          <br />
+          <span className={styles.serif}>idea empieza aquí.</span>
+        </h2>
+        <p>
+          Cuéntanos qué te interesa. Exploremos juntos cómo la inteligencia
+          artificial puede acompañar tu trabajo educativo.
+        </p>
+        <div className={styles.contactOptions}>
+          <ContactLink method="email">contacto@edukolea.com</ContactLink>
+          <ContactLink method="whatsapp">Conversemos por WhatsApp</ContactLink>
+        </div>
+        <p className={styles.small}>
+          ¿Prefieres conversar primero? Escríbenos directamente por el canal que
+          te resulte más cómodo.
+        </p>
+      </div>
+      <form
+        className={styles.form}
+        aria-label="Solicitar una demo"
+        aria-describedby="form-status"
+        onSubmit={submit}
+        noValidate
+        method="POST"
+        aria-busy={busy}
+        data-reveal
+      >
+        <div className={styles.formHeading}>
+          <span className={styles.formMark} aria-hidden="true">
+            ↗
+          </span>
+          <div>
+            <h3>Conozcamos tu aula</h3>
+            <p>Completa tus datos y coordinemos una demo.</p>
+          </div>
+        </div>
+        <p className={styles.small}>
+          Los campos con * son obligatorios. Envía tu solicitud sin salir de
+          esta página.
+        </p>
+        <fieldset className={styles.formFields} disabled={!ready || busy}>
+          <legend className="sr-only">Solicitud de demo</legend>
+          <input
+            type="text"
+            name="_honey"
+            tabIndex={-1}
+            autoComplete="off"
+            className={styles.honeypot}
+            aria-hidden="true"
+          />
+          <div className={styles.field}>
+            <label htmlFor="service">Servicio de interés *</label>
+            <select
+              id="service"
+              name="service"
+              required
+              value={service}
+              onChange={(event) => {
+                const value = event.target.value;
+                if (isService(value)) {
+                  setService(value);
+                  measure({
+                    event: "service_interest_select",
+                    service_slug: value,
+                  });
+                }
+              }}
+            >
+              <option value="" disabled>
+                Selecciona una línea educativa
+              </option>
+              {services.map((item) => (
+                <option key={item.slug} value={item.slug}>
+                  {item.name}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div className={styles.fieldRow}>
+            <div className={styles.field}>
+              <label htmlFor="name">Nombre *</label>
+              <input
+                id="name"
+                name="name"
+                autoComplete="name"
+                required
+                maxLength={120}
+                pattern=".*\S.*"
+                placeholder="Tu nombre"
+              />
+            </div>
+            <div className={styles.field}>
+              <label htmlFor="profile">Perfil *</label>
+              <select id="profile" name="profile" required defaultValue="">
+                <option value="" disabled>
+                  Selecciona tu perfil
+                </option>
+                <option value="docente">Docente</option>
+                <option value="directivo">Directivo/a</option>
+                <option value="otro">Otro</option>
+              </select>
+            </div>
+          </div>
+          <div className={styles.field}>
+            <label htmlFor="institution">
+              Institución <span>(opcional)</span>
+            </label>
+            <input
+              id="institution"
+              name="institution"
+              autoComplete="organization"
+              maxLength={200}
+              placeholder="Nombre de tu institución"
+            />
+          </div>
+          <div className={styles.field}>
+            <label htmlFor="contact-method">
+              Medio de contacto preferido *
+            </label>
+            <select
+              id="contact-method"
+              name="contact_method"
+              value={method}
+              onChange={(event) => setMethod(event.target.value)}
+              required
+            >
+              <option value="email">Correo electrónico</option>
+              <option value="whatsapp">WhatsApp</option>
+            </select>
+          </div>
+          <div className={styles.field}>
+            <label htmlFor="contact">
+              {method === "email"
+                ? "Correo electrónico"
+                : "Teléfono de WhatsApp"}{" "}
+              *
+            </label>
+            <input
+              id="contact"
+              name={method === "email" ? "email" : "phone"}
+              type={method === "email" ? "email" : "tel"}
+              autoComplete={method === "email" ? "email" : "tel"}
+              value={method === "email" ? email : phone}
+              onChange={(event) =>
+                method === "email"
+                  ? setEmail(event.target.value)
+                  : setPhone(event.target.value)
+              }
+              required
+              maxLength={method === "email" ? 254 : 30}
+              pattern={
+                method === "whatsapp"
+                  ? "[+]?[0-9][0-9 \\(\\)\\-]{6,28}[0-9]"
+                  : undefined
+              }
+              title={
+                method === "whatsapp"
+                  ? "Incluye el código de país, por ejemplo +51 906 815 008."
+                  : undefined
+              }
+              placeholder={
+                method === "email" ? "tu@correo.com" : "+51 906 815 008"
+              }
+            />
+          </div>
+          <label className={styles.consent}>
+            <input
+              type="checkbox"
+              name="consent"
+              value="Autorizo el uso de mis datos para coordinar la demo"
+              required
+            />
+            <span>
+              Autorizo a EduKolea a usar estos datos para contactarme sobre mi
+              demo. El envío se procesa mediante FormSubmit. He leído el{" "}
+              <a href="#aviso-privacidad">aviso de privacidad</a>. *
+            </span>
+          </label>
+          <button
+            type="submit"
+            className={styles.button}
+            disabled={!ready || busy}
+          >
+            {busy ? (
+              <>
+                <span className={styles.spinner} aria-hidden="true" /> Enviando
+                solicitud…
+              </>
+            ) : (
+              <>
+                Solicitar una demo <span aria-hidden="true">↗</span>
+              </>
+            )}
+          </button>
+        </fieldset>
+        <p
+          id="form-status"
+          className={styles.formStatus}
+          role="status"
+          aria-live="polite"
+        >
+          {status}
+        </p>
+        <noscript>
+          <p>
+            Activa JavaScript para enviar sin salir de la página o utiliza los
+            enlaces de correo y WhatsApp.
+          </p>
+        </noscript>
+      </form>
+    </section>
+  );
 }
