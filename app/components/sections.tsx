@@ -5,16 +5,16 @@ import styles from "./landing.module.css";
 
 function Brand() {
   return (
-    <a href="#inicio" className={styles.brand} aria-label="EduKolea, inicio">
+    <a href="#inicio" className={styles.brand} aria-label="EduKole, inicio">
       <Image
-        src="/logo/logoEdukolea.webp"
-        alt="Logo de EduKolea: koala y hoja verde"
+        src="/logo/logoEduKole.webp"
+        alt="Logo de EduKole: koala y hoja verde"
         width={48}
         height={48}
         preload
       />
       <span>
-        EduKolea<span className={styles.brandDot}>.</span>
+        EduKole<span className={styles.brandDot}>.</span>
       </span>
     </a>
   );
@@ -78,7 +78,7 @@ export function Hero() {
         <div className={styles.logoFrame}>
           <Image
             src="/logo/logomain.png"
-            alt="Koala de EduKolea sobre una hoja verde"
+            alt="Koala de EduKole sobre una hoja verde"
             width={320}
             height={320}
             preload
@@ -250,7 +250,7 @@ export function About() {
           <span className={styles.serif}>La tecnología la acompaña.</span>
         </h2>
         <p>
-          Somos EduKolea. Desarrollamos propuestas educativas con tecnología e
+          Somos EduKole. Desarrollamos propuestas educativas con tecnología e
           inteligencia artificial para apoyar a docentes y colegios en su día a
           día.
         </p>
@@ -395,7 +395,7 @@ export function DemoSteps() {
     ],
     [
       "Exploremos las posibilidades",
-      "El equipo de EduKolea conversará contigo sobre la propuesta y su disponibilidad.",
+      "El equipo de EduKole conversará contigo sobre la propuesta y su disponibilidad.",
     ],
   ];
   return (
@@ -432,7 +432,7 @@ export function Footer() {
               Para docentes y colegios.
             </p>
           </div>
-          <nav aria-label="Explorar EduKolea" className={styles.footerLinks}>
+          <nav aria-label="Explorar EduKole" className={styles.footerLinks}>
             <a href="#servicios">Servicios</a>
             <a href="#nosotros">Nosotros</a>
             <a href="#aliados">Aliados</a>
@@ -449,13 +449,13 @@ export function Footer() {
           <summary>Aviso de privacidad</summary>
           <div id="aviso-privacidad">
             <p>
-              Al enviar una solicitud, compartes con EduKolea tu nombre, perfil,
+              Al enviar una solicitud, compartes con EduKole tu nombre, perfil,
               institución si la incluyes, servicio de interés y correo o
               teléfono de contacto. Usamos estos datos para responder a tu
               solicitud y coordinar la demo por el medio que elijas.
             </p>
             <p>
-              El formulario se procesa en el servidor de EduKolea alojado en
+              El formulario se procesa en el servidor de EduKole alojado en
               Vercel y se envía mediante nuestro proveedor de correo a {contactEmail}. También puedes
               contactarnos directamente por correo o WhatsApp, servicios con sus
               propias condiciones de privacidad.
@@ -476,7 +476,7 @@ export function Footer() {
           </div>
         </details>
         <div className={styles.footerBottom}>
-          <span>© 2026 EduKolea</span>
+          <span>© 2026 EduKole</span>
           <span>Las personas en el centro. La educación por delante.</span>
           <a href="#inicio">Volver arriba ↑</a>
         </div>

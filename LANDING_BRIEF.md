@@ -1,6 +1,6 @@
 > Actualización de implementación: el despliegue vigente es Next.js en Vercel con Nodemailer y la API /api/contacto/. Las referencias originales a GitHub Pages y receptor externo quedan como antecedente de planificación; consultar README.md para la configuración actual.
 
-# EduKolea: brief de landing
+# EduKole: brief de landing
 
 **Objetivo:** captar solicitudes de demo desde redes sociales y publicar una primera versión antes del viernes 30 de octubre de 2026. La meta operativa es publicar a más tardar el jueves 29.
 
@@ -8,14 +8,14 @@
 
 ### Confirmado por el usuario
 
-- Marca: EduKolea; dominio: `https://edukolea.com`.
+- Marca: EduKole; dominio: `https://edukolea.com`.
 - Público usuario: docentes. El colegio contrata; puede pagar el colegio o el docente.
 - Hay tres líneas de servicio. Solo el servicio de creación de sesiones con IA se puede entregar hoy.
 - Los tres servicios deben aparecer; la creación de sesiones es la prioridad visual y de contenido.
 - Contactos: `contacto@edukolea.com` y WhatsApp `+51 906 815 008`.
 - Alojamiento: GitHub Pages con el dominio propio.
 - Stack existente: Next.js 16.4.3, React 19.3, App Router, TypeScript y Tailwind CSS 4. Se pide arquitectura modular y no usar Tailwind como única solución de estilos.
-- Logo disponible: `public/logo/logoEdukolea.webp`. Conservar forma, proporciones y colores.
+- Logo disponible: `public/logo/logoEduKole.webp`. Conservar forma, proporciones y colores.
 - Paleta solicitada: `#364E48`, `#F6FAF2`, `#D4D3CB`, `#ABB1AB`, `#63DE6C`.
 
 ### Propuestas para validar; no son decisiones comerciales aprobadas
@@ -53,18 +53,18 @@ Una página, en español, de lectura móvil. Navegación con enlaces a Servicios
 
 ### 1. Portada
 
-**Eyebrow:** EduKolea para docentes y colegios  
-**H1:** Crea sesiones de aprendizaje con apoyo de IA  
-**Texto:** Prepara sesiones para tu aula con EduKolea. Conoce en una demo cómo funciona la creación de sesiones con IA y explora también las otras líneas educativas de EduKolea.  
-**Botón:** Solicitar una demo  
+**Eyebrow:** EduKole para docentes y colegios
+**H1:** Crea sesiones de aprendizaje con apoyo de IA
+**Texto:** Prepara sesiones para tu aula con EduKole. Conoce en una demo cómo funciona la creación de sesiones con IA y explora también las otras líneas educativas de EduKole.
+**Botón:** Solicitar una demo
 **Apoyo breve:** Para docentes y colegios.
 
 ### 2. Servicio prioritario
 
-**H2:** Empieza por la sesión de aprendizaje  
-**Título de tarjeta:** AulaLista IA · nombre provisional  
-**Texto:** Crea sesiones de aprendizaje con apoyo de inteligencia artificial y adapta cada propuesta a las necesidades de tu aula.  
-**Disponibilidad:** Disponible para demo; validar exactamente qué se puede entregar hoy.  
+**H2:** Empieza por la sesión de aprendizaje
+**Título de tarjeta:** AulaLista IA · nombre provisional
+**Texto:** Crea sesiones de aprendizaje con apoyo de inteligencia artificial y adapta cada propuesta a las necesidades de tu aula.
+**Disponibilidad:** Disponible para demo; validar exactamente qué se puede entregar hoy.
 **Botón:** Solicitar una demo
 
 ### 3. Las otras dos líneas
@@ -74,25 +74,25 @@ Una página, en español, de lectura móvil. Navegación con enlaces a Servicios
 - **Kolea en Pares · nombre provisional:** Desarrollo de sesiones de aprendizaje entre pares, con agentes que pueden actuar como tutores. Alcance y disponibilidad por confirmar.
 - **Kolea Reporta · nombre provisional:** Reportes estandarizados y apoyo para tareas relacionadas con SIAGIE mediante IA. Alcance y disponibilidad por confirmar; no es una promesa de integración.
 
-### 4. Cómo conocer EduKolea
+### 4. Cómo conocer EduKole
 
-**H2:** Conoce la propuesta en una demo  
-**Pasos:** 1) Cuéntanos qué servicio te interesa. 2) Elige cómo prefieres que te contactemos. 3) El equipo de EduKolea coordinará contigo una demostración.  
+**H2:** Conoce la propuesta en una demo
+**Pasos:** 1) Cuéntanos qué servicio te interesa. 2) Elige cómo prefieres que te contactemos. 3) El equipo de EduKole coordinará contigo una demostración.
 No afirmar que la demo es automática, inmediata o personalizada hasta confirmar el proceso y la capacidad de atención.
 
 ### 5. Formulario
 
-**H2:** Solicita una demo  
-**Texto:** Cuéntanos quién eres y qué te interesa. Te contactaremos por el medio que elijas.  
-**Campos mínimos:** nombre; perfil (docente/directivo/otro); institución (opcional para docente independiente); servicio de interés (obligatorio: las tres opciones provisionales); medio de contacto preferido (correo/WhatsApp); correo o teléfono según el medio elegido.  
-**Botón:** Solicitar una demo  
-**Éxito solo tras confirmar recepción:** “¡Gracias! Recibimos tu solicitud. EduKolea se pondrá en contacto contigo por el medio que elegiste.”  
-**Error:** “No pudimos enviar la solicitud. Inténtalo de nuevo o contáctanos por correo o WhatsApp.”  
+**H2:** Solicita una demo
+**Texto:** Cuéntanos quién eres y qué te interesa. Te contactaremos por el medio que elijas.
+**Campos mínimos:** nombre; perfil (docente/directivo/otro); institución (opcional para docente independiente); servicio de interés (obligatorio: las tres opciones provisionales); medio de contacto preferido (correo/WhatsApp); correo o teléfono según el medio elegido.
+**Botón:** Solicitar una demo
+**Éxito solo tras confirmar recepción:** “¡Gracias! Recibimos tu solicitud. EduKole se pondrá en contacto contigo por el medio que elegiste.”
+**Error:** “No pudimos enviar la solicitud. Inténtalo de nuevo o contáctanos por correo o WhatsApp.”
 **Contactos de respaldo:** `mailto:contacto@edukolea.com` y enlace `https://wa.me/51906815008`.
 
 ### 6. Pie
 
-**Texto:** EduKolea · Soluciones educativas para docentes y colegios.  
+**Texto:** EduKole · Soluciones educativas para docentes y colegios.
 Enlaces: correo, WhatsApp y aviso de privacidad. El aviso y el texto de consentimiento deben validarse antes de recoger datos personales.
 
 ## Formulario y recorrido de la solicitud
