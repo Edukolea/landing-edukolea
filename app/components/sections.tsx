@@ -367,6 +367,17 @@ export function Allies() {
             </div>
             <p>Incuba Centro</p>
           </li>
+          <li>
+            <div className={styles.allyImage}>
+              <Image
+                src="/aliados/minedu.png"
+                alt="Ministerio de Educación del Perú (MINEDU)"
+                width={482}
+                height={104}
+              />
+            </div>
+            <p>Ministerio de Educación</p>
+          </li>
         </ul>
       </div>
     </section>

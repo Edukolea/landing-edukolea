@@ -652,7 +652,7 @@
 }
 .allyGrid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 22px;
   padding: 0;
   margin: 40px 0 0;
@@ -1496,7 +1496,7 @@
   .value { padding-block: 16px; gap: 12px; }
   .allies { padding-block: 32px; }
   .alliesHeading h2 { font-size: 30px; }
-  .allyGrid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; margin-top: 22px; }
+  .allyGrid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; margin-top: 22px; }
   .allyGrid li { min-width: 0; padding: 12px 6px; gap: 8px; }
   .allyImage { height: 80px; }
   .allyImage img, .allyGrid li:first-child img, .allyGrid li:nth-child(3) img { max-height: 76px; }
