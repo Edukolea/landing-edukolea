@@ -1,0 +1,393 @@
+{
+  "conditions": {
+    "url": "http://127.0.0.1:3005/",
+    "version": "13.6.0",
+    "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36",
+    "screen": {
+      "mobile": true,
+      "width": 412,
+      "height": 823,
+      "deviceScaleFactor": 1.75,
+      "disabled": false
+    },
+    "throttle": {
+      "rttMs": 150,
+      "throughputKbps": 1638.4,
+      "requestLatencyMs": 562.5,
+      "downloadThroughputKbps": 1474.5600000000002,
+      "uploadThroughputKbps": 675,
+      "cpuSlowdownMultiplier": 4
+    },
+    "method": "simulate",
+    "storageReset": true
+  },
+  "before": {
+    "performance": {
+      "median": 96,
+      "min": 91,
+      "max": 98,
+      "values": [
+        96,
+        91,
+        98
+      ]
+    },
+    "accessibility": {
+      "median": 100,
+      "min": 100,
+      "max": 100,
+      "values": [
+        100,
+        100,
+        100
+      ]
+    },
+    "bestPractices": {
+      "median": 100,
+      "min": 100,
+      "max": 100,
+      "values": [
+        100,
+        100,
+        100
+      ]
+    },
+    "seo": {
+      "median": 100,
+      "min": 100,
+      "max": 100,
+      "values": [
+        100,
+        100,
+        100
+      ]
+    },
+    "LCP": {
+      "median": 1278.46955,
+      "min": 1062.1544,
+      "max": 1448.51325,
+      "values": [
+        1278.46955,
+        1448.51325,
+        1062.1544
+      ]
+    },
+    "TBT": {
+      "median": 167.26522499999987,
+      "min": 132.42279999999982,
+      "max": 356.5,
+      "values": [
+        167.26522499999987,
+        356.5,
+        132.42279999999982
+      ]
+    },
+    "CLS": {
+      "median": 0,
+      "min": 0,
+      "max": 0,
+      "values": [
+        0,
+        0,
+        0
+      ]
+    },
+    "documentLatency": {
+      "median": 37,
+      "min": 20,
+      "max": 156,
+      "values": [
+        156,
+        20,
+        37
+      ]
+    },
+    "stylesheetBytes": {
+      "median": 13346,
+      "min": 13346,
+      "max": 13346,
+      "values": [
+        13346,
+        13346,
+        13346
+      ]
+    },
+    "totalBytes": {
+      "median": 194450,
+      "min": 194450,
+      "max": 194450,
+      "values": [
+        194450,
+        194450,
+        194450
+      ]
+    },
+    "reflowMs": {
+      "median": 47.314,
+      "min": 0,
+      "max": 177.431,
+      "values": [
+        0,
+        47.314,
+        177.431
+      ]
+    }
+  },
+  "after": {
+    "performance": {
+      "median": 99.5,
+      "min": 77,
+      "max": 100,
+      "values": [
+        81,
+        77,
+        99,
+        100,
+        100,
+        100
+      ]
+    },
+    "accessibility": {
+      "median": 100,
+      "min": 100,
+      "max": 100,
+      "values": [
+        100,
+        100,
+        100,
+        100,
+        100,
+        100
+      ]
+    },
+    "bestPractices": {
+      "median": 100,
+      "min": 100,
+      "max": 100,
+      "values": [
+        100,
+        100,
+        100,
+        100,
+        100,
+        100
+      ]
+    },
+    "seo": {
+      "median": 100,
+      "min": 100,
+      "max": 100,
+      "values": [
+        100,
+        100,
+        100,
+        100,
+        100,
+        100
+      ]
+    },
+    "LCP": {
+      "median": 1079.557875,
+      "min": 921.3998999999999,
+      "max": 1533.9291500000002,
+      "values": [
+        1533.9291500000002,
+        1513.58005,
+        1136.17355,
+        940.5571,
+        921.3998999999999,
+        1022.9422
+      ]
+    },
+    "TBT": {
+      "median": 67.7066125,
+      "min": 36.5,
+      "max": 1003,
+      "values": [
+        751.5000000000002,
+        1003,
+        89.91322500000001,
+        37.5,
+        36.5,
+        45.5
+      ]
+    },
+    "CLS": {
+      "median": 0,
+      "min": 0,
+      "max": 0,
+      "values": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "documentLatency": {
+      "median": 29,
+      "min": 8,
+      "max": 304,
+      "values": [
+        304,
+        58,
+        28,
+        30,
+        12,
+        8
+      ]
+    },
+    "stylesheetBytes": {
+      "median": 8595,
+      "min": 8595,
+      "max": 8595,
+      "values": [
+        8595,
+        8595,
+        8595,
+        8595,
+        8595,
+        8595
+      ]
+    },
+    "totalBytes": {
+      "median": 189700,
+      "min": 189700,
+      "max": 189700,
+      "values": [
+        189700,
+        189700,
+        189700,
+        189700,
+        189700,
+        189700
+      ]
+    },
+    "reflowMs": {
+      "median": 106.0665,
+      "min": 0,
+      "max": 181.555,
+      "values": [
+        0,
+        95.29,
+        0,
+        127.121,
+        116.843,
+        181.555
+      ]
+    }
+  },
+  "firstFinalSeries": {
+    "performance": {
+      "median": 81,
+      "min": 77,
+      "max": 99,
+      "values": [
+        81,
+        77,
+        99
+      ]
+    },
+    "accessibility": {
+      "median": 100,
+      "min": 100,
+      "max": 100,
+      "values": [
+        100,
+        100,
+        100
+      ]
+    },
+    "bestPractices": {
+      "median": 100,
+      "min": 100,
+      "max": 100,
+      "values": [
+        100,
+        100,
+        100
+      ]
+    },
+    "seo": {
+      "median": 100,
+      "min": 100,
+      "max": 100,
+      "values": [
+        100,
+        100,
+        100
+      ]
+    },
+    "LCP": {
+      "median": 1513.58005,
+      "min": 1136.17355,
+      "max": 1533.9291500000002,
+      "values": [
+        1533.9291500000002,
+        1513.58005,
+        1136.17355
+      ]
+    },
+    "TBT": {
+      "median": 751.5000000000002,
+      "min": 89.91322500000001,
+      "max": 1003,
+      "values": [
+        751.5000000000002,
+        1003,
+        89.91322500000001
+      ]
+    },
+    "CLS": {
+      "median": 0,
+      "min": 0,
+      "max": 0,
+      "values": [
+        0,
+        0,
+        0
+      ]
+    },
+    "documentLatency": {
+      "median": 58,
+      "min": 28,
+      "max": 304,
+      "values": [
+        304,
+        58,
+        28
+      ]
+    },
+    "stylesheetBytes": {
+      "median": 8595,
+      "min": 8595,
+      "max": 8595,
+      "values": [
+        8595,
+        8595,
+        8595
+      ]
+    },
+    "totalBytes": {
+      "median": 189700,
+      "min": 189700,
+      "max": 189700,
+      "values": [
+        189700,
+        189700,
+        189700
+      ]
+    },
+    "reflowMs": {
+      "median": 0,
+      "min": 0,
+      "max": 95.29,
+      "values": [
+        0,
+        95.29,
+        0
+      ]
+    }
+  }
+}

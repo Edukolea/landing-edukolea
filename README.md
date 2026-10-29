@@ -20,6 +20,18 @@ npm start
 - `npm run smtp:verify -- --send-test` también envía un correo técnico a `contacto@edukolea.com`. Comprobar el buzón y spam para verificar la entrega final.
 - `.github/workflows/checks.yml` ejecuta lint, pruebas, build y comprobaciones HTTP sin necesitar credenciales SMTP. El despliegue anterior a GitHub Pages se retiró porque ese hosting no puede ejecutar la API.
 
+## Lighthouse: medir producción
+
+Para evitar medir HMR, DevTools y compilación de desarrollo, usar una terminal dedicada:
+
+```sh
+npm run perf:preview
+```
+
+Esto compila y sirve producción en `http://localhost:3005/`. En otra terminal, ejecutar `npm run perf:verify` antes de abrir Lighthouse sobre esa URL. El verificador rechaza los bundles de desarrollo detectados; no equivale a una auditoría completa. No medir rendimiento con `npm run dev` ni asumir que un puerto concreto garantiza producción.
+
+Los JSON, HTML y trazas de la revisión de CSS y latencia están en `reports/latency-review/`. Los avisos sobre CSS crítico o polyfills no se solucionan eliminando estilos de marca ni recortando compatibilidad sin verificar el resultado.
+
 ## Configuración de correo
 
 Configurar estas variables **privadas** en `.env` para desarrollo. `.env.example` contiene solo los nombres y valores públicos de referencia; `.env` y sus secretos están ignorados por Git.

@@ -210,6 +210,11 @@
   height: 100%;
   object-fit: contain;
 }
+.logoFrame picture {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
 .spark {
   position: absolute;
   right: 33px;
@@ -1616,4 +1621,27 @@
   .artOrbit, .logoFrame, .artChip, .spark, .canvasSpark,
   .servicePanel .book, .servicePanel .serviceSpark,
   .servicePanel .peerArt span, .servicePanel .reportArt > span { animation: none !important; }
+}
+.videoSection { padding-bottom: 76px; scroll-margin-top: 28px; }
+.videoIntro { display: flex; justify-content: space-between; align-items: end; gap: 32px; margin-bottom: 28px; }
+.videoIntro .eyebrow { margin-bottom: 12px; }
+.videoIntro h2 { font-size: clamp(32px, 4vw, 50px); letter-spacing: -1.7px; line-height: 1.12; font-weight: 400; margin: 0; }
+.videoIntro > p { max-width: 310px; font-size: 14px; margin-bottom: 0; }
+.videoFrame { aspect-ratio: 16 / 9; overflow: hidden; border-radius: 20px; background: #263e36; border: 1px solid #758b7c; box-shadow: 0 20px 55px #364e4815; }
+.videoFrame iframe { width: 100%; height: 100%; display: block; border: 0; }
+.videoFrame { position: relative; }
+.videoFrame noscript iframe { position: absolute; inset: 0; }
+.videoLoad { width: 100%; height: 100%; border: 0; cursor: pointer; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 14px; background: radial-gradient(ellipse at 50% 60%, #486155, #263e36); color: var(--paper); }
+.videoLoad > span:first-child { display: grid; place-items: center; width: 64px; height: 64px; border-radius: 50%; background: var(--lime); color: var(--forest); font-size: 24px; padding-left: 4px; }
+.videoLoad strong { font-size: clamp(17px, 3vw, 26px); font-weight: 500; }
+.videoLoad > span:last-child { font-size: 12px; }
+.videoFallback { display: inline-block; font-size: 12px; margin-top: 16px; padding-block: 8px; }
+.privacy h3 { font-size: 19px; font-weight: 500; margin: 4px 0 16px; }
+.privacy h4 { font-size: 13px; margin: 24px 0 8px; color: #cfeac6; }
+.privacy p { line-height: 1.8; }
+@media (max-width: 760px) {
+  .videoSection { padding-bottom: 36px; }
+  .videoIntro { flex-direction: column; align-items: start; gap: 14px; margin-bottom: 20px; }
+  .videoIntro > p { max-width: none; font-size: 13px; }
+  .videoFrame { border-radius: 12px; }
 }

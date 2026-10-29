@@ -1,14 +1,13 @@
 import type { Metadata } from "next";
 import "./globals.css";
-const title = "EduKole | Crea sesiones de aprendizaje con IA";
-const description =
-  "Crea sesiones de aprendizaje con apoyo de IA. Conoce EduKole en una demo para docentes y colegios.";
+import { siteTitle as title, siteDescription as description, siteUrl } from "./lib/seo";
 export const metadata: Metadata = {
-  metadataBase: new URL("https://edukolea.com/"),
+  metadataBase: new URL(siteUrl),
+  applicationName: "EduKole",
   title,
   description,
   alternates: { canonical: "https://edukolea.com/" },
-  robots: { index: true, follow: true },
+  robots: { index: true, follow: true, googleBot: { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1, "max-video-preview": -1 } },
   openGraph: {
     type: "website",
     locale: "es",

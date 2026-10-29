@@ -7,7 +7,6 @@ import {
   useSyncExternalStore,
   type FormEvent,
 } from "react";
-import Swal from "sweetalert2";
 import { services, type ServiceSlug } from "../lib/content";
 import { sendDemoRequest } from "../lib/demo-request";
 import { measure, preserveCampaign } from "../lib/measurement";
@@ -18,7 +17,9 @@ const subscribe = () => () => {};
 const isService = (value: unknown): value is ServiceSlug =>
   services.some((service) => service.slug === value);
 
-function alerts() {
+async function alerts() {
+  // The bundled entry includes its own styles; avoid duplicate blocking CSS.
+  const { default: Swal } = await import("sweetalert2");
   return Swal.mixin({
     background: "#f6faf2",
     color: "#364e48",
@@ -70,8 +71,9 @@ export function DemoForm() {
     if (locked.current) return;
     locked.current = true;
     const form = event.currentTarget;
-    const dialog = alerts();
+    let dialog: Awaited<ReturnType<typeof alerts>> | undefined;
     try {
+      dialog = await alerts();
       const invalid = Array.from(form.elements).find(
         (element) =>
           (element instanceof HTMLInputElement ||
@@ -111,7 +113,7 @@ export function DemoForm() {
         allowOutsideClick: false,
         allowEscapeKey: false,
         showConfirmButton: false,
-        didOpen: () => Swal.showLoading(),
+        didOpen: () => dialog?.showLoading(),
       });
       await sendDemoRequest(fields);
       setBusy(false);
@@ -132,7 +134,7 @@ export function DemoForm() {
       setStatus(
         "No pudimos confirmar el envío. Tus datos siguen aquí para reintentar.",
       );
-      await dialog.fire({
+      await dialog?.fire({
         icon: "error",
         titleText: "No pudimos confirmar el envío",
         text: "Revisa tu conexión y vuelve a intentarlo. Si el problema continúa, escribe a contacto@edukolea.com o usa WhatsApp. Conservamos tus datos en el formulario; si hubo un corte de conexión, comprueba antes si ya recibiste respuesta.",

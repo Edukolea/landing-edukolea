@@ -1,4 +1,4 @@
-@import "sweetalert2/dist/sweetalert2.min.css";
+/* SweetAlert2's bundled entry supplies its CSS when a dialog is first opened. */
 :root { --forest: #364e48; --paper: #f6faf2; --stone: #d4d3cb; --sage: #abb1ab; --lime: #63de6c; }
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; scroll-padding-top: 100px; }

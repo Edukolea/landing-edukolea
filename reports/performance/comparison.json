@@ -1,0 +1,277 @@
+{
+  "conditions": {
+    "version": "13.6.0",
+    "url": "http://127.0.0.1:3004/",
+    "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36",
+    "formFactor": "mobile",
+    "screen": {
+      "mobile": true,
+      "width": 412,
+      "height": 823,
+      "deviceScaleFactor": 1.75,
+      "disabled": false
+    },
+    "throttling": {
+      "rttMs": 150,
+      "throughputKbps": 1638.4,
+      "requestLatencyMs": 562.5,
+      "downloadThroughputKbps": 1474.5600000000002,
+      "uploadThroughputKbps": 675,
+      "cpuSlowdownMultiplier": 4
+    },
+    "method": "simulate",
+    "disableStorageReset": false
+  },
+  "before": {
+    "scores": {
+      "performance": {
+        "median": 98,
+        "min": 96,
+        "max": 99,
+        "runs": [
+          98,
+          96,
+          99
+        ]
+      },
+      "accessibility": {
+        "median": 100,
+        "min": 100,
+        "max": 100,
+        "runs": [
+          100,
+          100,
+          100
+        ]
+      },
+      "best-practices": {
+        "median": 100,
+        "min": 100,
+        "max": 100,
+        "runs": [
+          100,
+          100,
+          100
+        ]
+      },
+      "seo": {
+        "median": 100,
+        "min": 100,
+        "max": 100,
+        "runs": [
+          100,
+          100,
+          100
+        ]
+      }
+    },
+    "metrics": {
+      "FCP": {
+        "median": 1225.00315,
+        "min": 1071.502,
+        "max": 1291.1182,
+        "runs": [
+          1291.1182,
+          1225.00315,
+          1071.502
+        ]
+      },
+      "LCP": {
+        "median": 1225.00315,
+        "min": 1071.502,
+        "max": 1291.1182,
+        "runs": [
+          1291.1182,
+          1225.00315,
+          1071.502
+        ]
+      },
+      "TBT": {
+        "median": 142.94090000000028,
+        "min": 86.5,
+        "max": 214.998425,
+        "runs": [
+          142.94090000000028,
+          214.998425,
+          86.5
+        ]
+      },
+      "CLS": {
+        "median": 0,
+        "min": 0,
+        "max": 0,
+        "runs": [
+          0,
+          0,
+          0
+        ]
+      },
+      "Speed Index": {
+        "median": 2603.1466716382106,
+        "min": 2549.9326115026633,
+        "max": 3087.993940571799,
+        "runs": [
+          3087.993940571799,
+          2603.1466716382106,
+          2549.9326115026633
+        ]
+      },
+      "Transferencia total": {
+        "median": 237601,
+        "min": 237601,
+        "max": 237601,
+        "runs": [
+          237601,
+          237601,
+          237601
+        ]
+      },
+      "JavaScript transferido": {
+        "median": 169026,
+        "min": 169026,
+        "max": 169026,
+        "runs": [
+          169026,
+          169026,
+          169026
+        ]
+      },
+      "JavaScript sin usar (estimado)": {
+        "median": 53122,
+        "min": 53122,
+        "max": 53122,
+        "runs": [
+          53122,
+          53122,
+          53122
+        ]
+      }
+    }
+  },
+  "after": {
+    "scores": {
+      "performance": {
+        "median": 93,
+        "min": 84,
+        "max": 99,
+        "runs": [
+          99,
+          84,
+          93
+        ]
+      },
+      "accessibility": {
+        "median": 100,
+        "min": 100,
+        "max": 100,
+        "runs": [
+          100,
+          100,
+          100
+        ]
+      },
+      "best-practices": {
+        "median": 100,
+        "min": 100,
+        "max": 100,
+        "runs": [
+          100,
+          100,
+          100
+        ]
+      },
+      "seo": {
+        "median": 100,
+        "min": 100,
+        "max": 100,
+        "runs": [
+          100,
+          100,
+          100
+        ]
+      }
+    },
+    "metrics": {
+      "FCP": {
+        "median": 1208.43575,
+        "min": 1136.9328500000001,
+        "max": 1393.05955,
+        "runs": [
+          1136.9328500000001,
+          1208.43575,
+          1393.05955
+        ]
+      },
+      "LCP": {
+        "median": 1208.43575,
+        "min": 1136.9328500000001,
+        "max": 1393.05955,
+        "runs": [
+          1136.9328500000001,
+          1208.43575,
+          1393.05955
+        ]
+      },
+      "TBT": {
+        "median": 292.970225,
+        "min": 86.5,
+        "max": 644.5,
+        "runs": [
+          86.5,
+          644.5,
+          292.970225
+        ]
+      },
+      "CLS": {
+        "median": 0,
+        "min": 0,
+        "max": 0,
+        "runs": [
+          0,
+          0,
+          0
+        ]
+      },
+      "Speed Index": {
+        "median": 2533.42461907757,
+        "min": 1865.3656599085666,
+        "max": 2628.2036613408636,
+        "runs": [
+          2533.42461907757,
+          1865.3656599085666,
+          2628.2036613408636
+        ]
+      },
+      "Transferencia total": {
+        "median": 194450,
+        "min": 194450,
+        "max": 194450,
+        "runs": [
+          194450,
+          194450,
+          194450
+        ]
+      },
+      "JavaScript transferido": {
+        "median": 149623,
+        "min": 149623,
+        "max": 149623,
+        "runs": [
+          149623,
+          149623,
+          149623
+        ]
+      },
+      "JavaScript sin usar (estimado)": {
+        "median": 53190,
+        "min": 53190,
+        "max": 53190,
+        "runs": [
+          53190,
+          53190,
+          53190
+        ]
+      }
+    }
+  }
+}
