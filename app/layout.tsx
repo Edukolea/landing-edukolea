@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { AnalyticsConsent } from "./components/analytics-consent";
 import { siteTitle as title, siteDescription as description, siteUrl } from "./lib/seo";
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -43,7 +44,10 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="es">
-      <body>{children}</body>
+      <body>
+        {children}
+        <AnalyticsConsent gaId={process.env.NEXT_PUBLIC_GA_ID} />
+      </body>
     </html>
   );
 }

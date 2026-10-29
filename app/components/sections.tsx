@@ -496,7 +496,12 @@ export function Footer() {
             </p>
             <h4>Medición y almacenamiento en tu navegador</h4>
             <p>
-              Actualmente este sitio no utiliza Google Analytics. Las interacciones,
+              Solo si aceptas las cookies analíticas, usamos Google Analytics 4 para
+              medir visitas y navegación. Google puede procesar identificadores de
+              cookies e información técnica de tu dispositivo. Puedes rechazar o
+              retirar el permiso desde «Cookies analíticas»; al retirarlo detenemos
+              la medición y eliminamos las cookies de GA accesibles para este sitio.
+              Guardamos tu elección en este navegador. Las interacciones,
               como los clics y la selección de servicio, generan eventos locales que
               no incluyen los datos personales del formulario. Para identificar
               desde qué campaña llegaste, podemos conservar códigos de campaña
