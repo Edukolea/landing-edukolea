@@ -1,17 +1,17 @@
 import Image from "next/image";
 import { services, contactEmail } from "../lib/content";
 import { ContactLink, DemoLink } from "./actions";
+import { VideoPlayer } from "./video-player";
 import styles from "./landing.module.css";
 
 function Brand() {
   return (
     <a href="#inicio" className={styles.brand} aria-label="EduKole, inicio">
       <Image
-        src="/logo/logoEduKole.webp"
+        src="/logo/brand-mark.webp"
         alt="Logo de EduKole: koala y hoja verde"
         width={48}
         height={48}
-        preload
       />
       <span>
         EduKole<span className={styles.brandDot}>.</span>
@@ -47,7 +47,7 @@ export function Hero() {
       className={`${styles.container} ${styles.hero}`}
       aria-labelledby="hero-title"
     >
-      <div className={styles.heroCopy} data-reveal>
+      <div className={styles.heroCopy}>
         <p className={styles.eyebrow}>
           <span className={styles.dot} /> EDUCACIÓN CON MÁS POSIBILIDADES
         </p>
@@ -72,17 +72,24 @@ export function Hero() {
           Para docentes y colegios · AulaLista IA disponible para demo
         </p>
       </div>
-      <div className={styles.heroArt} data-reveal>
+      <div className={styles.heroArt}>
         <span className={styles.artLabel}>EL FUTURO SE APRENDE EN EL AULA</span>
         <div className={styles.artOrbit} aria-hidden="true" />
         <div className={styles.logoFrame}>
+          <picture>
+            <source
+              srcSet="/logo/hero-classroom-320.webp 320w, /logo/hero-classroom.webp 640w"
+              sizes="(max-width: 760px) 145px, (max-width: 1000px) 225px, 250px"
+            />
           <Image
-            src="/logo/logomain.png"
-            alt="Koala de EduKole sobre una hoja verde"
+            src="/logo/hero-classroom.webp"
+            alt="Docente preparando una sesión de aprendizaje junto al koala de EduKole"
             width={320}
             height={320}
-            preload
+            loading="eager"
+            fetchPriority="high"
           />
+          </picture>
         </div>
         <span className={styles.spark} aria-hidden="true">
           ✳
@@ -102,6 +109,21 @@ export function Hero() {
           </p>
         </div>
       </div>
+    </section>
+  );
+}
+export function MvpVideo() {
+  return (
+    <section id="mvp" className={`${styles.container} ${styles.videoSection}`} aria-labelledby="mvp-title">
+      <div className={styles.videoIntro} data-reveal>
+        <div>
+          <p className={styles.eyebrow}>CONOCE NUESTRO MVP</p>
+          <h2 id="mvp-title">De la idea <span className={styles.serif}>a tu aula.</span></h2>
+        </div>
+        <p>Así se ve AulaLista IA en acción. Dale play y conoce nuestra propuesta.</p>
+      </div>
+      <VideoPlayer />
+      <a className={styles.videoFallback} href="https://www.youtube.com/watch?v=OoY5uN0cuL0" target="_blank" rel="noopener noreferrer">También puedes verlo en YouTube ↗</a>
     </section>
   );
 }
@@ -212,13 +234,10 @@ export function Services() {
               {index === 0 && (
                 <a
                   className={styles.mvpPreview}
-                  href="https://www.youtube.com/watch?v=OoY5uN0cuL0"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="Ver el MVP de AulaLista IA en YouTube (abre en otra pestaña)"
+                  href="#mvp"
                 >
                   <span className={styles.playIcon} aria-hidden="true">▶</span>
-                  <span><small>DEL PROPÓSITO A LA PRÁCTICA</small><strong>Mira AulaLista IA en acción</strong><span>Conoce nuestro MVP en video · YouTube</span></span>
+                  <span><small>DEL PROPÓSITO A LA PRÁCTICA</small><strong>Mira AulaLista IA en acción</strong><span>Reproduce el video de nuestro MVP</span></span>
                   <span className={styles.videoArrow} aria-hidden="true">↗</span>
                 </a>
               )}
@@ -346,7 +365,7 @@ export function Allies() {
           <li>
             <div className={styles.allyImage}>
               <Image
-                src="/aliados/oea.png"
+                src="/aliados/oea.webp"
                 alt="Organización de los Estados Americanos (OEA)"
                 width={450}
                 height={444}
@@ -461,29 +480,42 @@ export function Footer() {
         <details id="privacidad" className={styles.privacy}>
           <summary>Aviso de privacidad</summary>
           <div id="aviso-privacidad">
+            <h3>Tu información, con un propósito claro</h3>
             <p>
-              Al enviar una solicitud, compartes con EduKole tu nombre, perfil,
-              institución si la incluyes, servicio de interés y correo o
-              teléfono de contacto. Usamos estos datos para responder a tu
-              solicitud y coordinar la demo por el medio que elijas.
+              En EduKole usamos los datos que nos compartes para responder a tu
+              consulta y coordinar una demo por el medio que elijas. El formulario
+              solicita tu nombre, perfil, servicio de interés y correo electrónico
+              o número de WhatsApp. El nombre de tu institución es opcional.
             </p>
+            <h4>Cómo recibimos tu solicitud</h4>
             <p>
-              El formulario se procesa en el servidor de EduKole alojado en
-              Vercel y se envía mediante nuestro proveedor de correo a {contactEmail}. También puedes
-              contactarnos directamente por correo o WhatsApp, servicios con sus
-              propias condiciones de privacidad.
+              Tu solicitud se procesa en nuestra infraestructura alojada en Vercel
+              y se envía mediante nuestro proveedor de correo a {contactEmail}.
+              Si nos escribes directamente por correo o WhatsApp, esos servicios
+              también procesan información según sus propias políticas de privacidad.
             </p>
+            <h4>Medición y almacenamiento en tu navegador</h4>
             <p>
-              No se ha instalado Google Analytics. Los clics y la selección de
-              servicio generan únicamente eventos locales sin datos personales.
-              Los códigos de campaña permitidos se conservan en el
-              almacenamiento de sesión de esta pestaña, cuando el navegador lo
-              permite. Los datos del formulario no se guardan en el
-              almacenamiento del navegador ni se incluyen en estos eventos.
+              Actualmente este sitio no utiliza Google Analytics. Las interacciones,
+              como los clics y la selección de servicio, generan eventos locales que
+              no incluyen los datos personales del formulario. Para identificar
+              desde qué campaña llegaste, podemos conservar códigos de campaña
+              permitidos durante la sesión de esta pestaña, si tu navegador lo permite.
+              No guardamos los datos del formulario en el almacenamiento del navegador.
             </p>
+            <h4>Video de YouTube</h4>
             <p>
-              Para consultar sobre tus datos o solicitar su actualización o
-              eliminación, escribe a{" "}
+              El video de AulaLista IA utiliza el reproductor de YouTube en modo
+              de privacidad mejorada. Al cargar el reproductor o reproducir el video,
+              tu navegador se conecta con servicios de Google y YouTube, que pueden
+              procesar información técnica y de reproducción conforme a su{" "}
+              <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">política de privacidad</a>.
+            </p>
+            <h4>Consultas y solicitudes sobre tus datos</h4>
+            <p>
+              Puedes consultar sobre el uso de tu información, solicitar su
+              actualización o eliminación, o retirar tu autorización para futuros
+              contactos relacionados con la demo escribiendo a{" "}
               <a href={`mailto:${contactEmail}`}>{contactEmail}</a>.
             </p>
           </div>

@@ -6,6 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    "perf:preview": "npm run build && next start --port 3005",
+    "perf:verify": "node scripts/verify-production.mjs",
     "smtp:verify": "node scripts/check-smtp.mjs",
     "test": "node scripts/verify-demo.mjs && node scripts/verify-contact.mjs && node scripts/verify-measurement.mjs",
     "lint": "eslint"
