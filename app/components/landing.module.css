@@ -1530,3 +1530,90 @@
     top: auto;
   }
 }
+/* A living classroom: quiet movement, tactile surfaces and visible illustrations. */
+.heroArt {
+  background: radial-gradient(circle at 70% 22%, #d3efb7 0, transparent 42%), linear-gradient(145deg, #e8eee3, #dce8d4);
+  border: 1px solid #cfddc6;
+}
+.hero h1 .serif { position: relative; width: fit-content; isolation: isolate; }
+.hero h1 .serif::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: -5px;
+  height: 9px; border-radius: 50%; background: var(--lime); opacity: .48;
+  transform: rotate(-2deg); z-index: -1;
+}
+.artOrbit { animation: orbitTurn 45s linear infinite; }
+.artOrbit::before {
+  content: ""; position: absolute; width: 13px; height: 13px;
+  border-radius: 50%; background: var(--lime); top: 12%; left: 12%;
+  box-shadow: 0 0 0 7px #63de6c20;
+}
+.logoFrame { animation: gentleFloat 6s ease-in-out infinite; }
+.artChip { animation: gentleFloat 5s ease-in-out infinite; }
+.chipAI { animation-delay: -2.5s; }
+.spark, .canvasSpark { animation: sparkTurn 12s ease-in-out infinite; }
+.servicePanel { overflow: clip; }
+.servicePanel::before {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: radial-gradient(ellipse at 100% 0, #b7ee9b13, transparent 55%);
+}
+.serviceArt { background: radial-gradient(ellipse, #b7ee9b17, transparent 70%); }
+.servicePanel[data-service-active="true"] .book { animation: bookFloat 4s ease-in-out infinite; }
+.servicePanel[data-service-active="true"] .serviceSpark { animation: sparkTurn 6s ease-in-out infinite; }
+.servicePanel[data-service-active="true"] .peerArt span { animation: peerConnect 3.5s ease-in-out infinite; }
+.servicePanel[data-service-active="true"] .peerArt span:last-child { animation-delay: -1.75s; }
+.servicePanel[data-service-active="true"] .reportArt > span { animation: barGrow 2.8s ease-in-out infinite; }
+.reportArt > span:nth-child(2) { animation-delay: -.4s !important; }
+.reportArt > span:nth-child(3) { animation-delay: -.8s !important; }
+.reportArt > span:nth-child(4) { animation-delay: -1.2s !important; }
+.mvpPreview {
+  position: relative; display: flex; align-items: center; gap: 18px;
+  padding: 19px 22px; margin-bottom: 24px; border: 1px solid #cfeac655;
+  border-radius: 14px; background: #cfeac610; text-decoration: none;
+  transition: background .25s, border-color .25s, translate .25s;
+}
+.mvpPreview:hover { background: #cfeac622; border-color: var(--lime); translate: 0 -3px; }
+.playIcon {
+  display: grid; place-items: center; flex: 0 0 48px; height: 48px;
+  padding-left: 3px; border-radius: 50%; background: var(--lime); color: #263e36;
+  box-shadow: 0 0 0 6px #63de6c16; font-size: 17px;
+}
+.mvpPreview small { display: block; color: #cfeac6; font-size: 9px; letter-spacing: 1.3px; margin-bottom: 6px; }
+.mvpPreview strong { display: block; font-size: 18px; font-weight: 500; }
+.mvpPreview > span > span { display: block; font-size: 11px; margin-top: 6px; color: #e0e9db; }
+.videoArrow { margin-left: auto; font-size: 26px; }
+.value, .allyGrid li { transition: translate .3s, background .3s; }
+.value:hover { translate: 5px 0; }
+.allyGrid li:hover { translate: 0 -5px; background: #e8eee3; }
+@keyframes gentleFloat { 0%, 100% { translate: 0 0; } 50% { translate: 0 -9px; } }
+@keyframes orbitTurn { to { rotate: 360deg; } }
+@keyframes sparkTurn { 0%, 100% { rotate: 0deg; scale: 1; } 50% { rotate: 90deg; scale: .85; } }
+@keyframes bookFloat { 0%, 100% { transform: rotate(-9deg) translateY(0); } 50% { transform: rotate(-3deg) translateY(-10px); } }
+@keyframes peerConnect { 0%, 100% { translate: 0 0; scale: 1; } 50% { translate: 0 -8px; scale: 1.06; } }
+@keyframes barGrow { 0%, 100% { transform: scaleY(.8); } 50% { transform: scaleY(1.06); } }
+@media (max-width: 760px) {
+  .serviceBody { gap: 8px; }
+  .provisional, .serviceCopy h3 { padding-right: 0; }
+  .serviceCopy h3 { overflow-wrap: normal; font-size: clamp(30px, 8.3vw, 42px); }
+  .serviceArt {
+    position: relative; inset: auto; width: 100%; height: 170px; min-height: 170px;
+    transform: none; margin: 4px 0 0; border-radius: 18px;
+    background: radial-gradient(ellipse, #cfeac615, transparent 72%);
+  }
+  .book { width: 150px; height: 104px; }
+  .book > div { padding: 12px; }
+  .book > div::after { height: 70px; }
+  .serviceSpark { right: calc(50% - 115px); top: 8px; font-size: 48px; }
+  .artFootnote { display: block; bottom: 0; font-size: 10px; }
+  .peerArt span { width: 68px; height: 68px; font-size: 40px; }
+  .reportArt { height: 105px; margin-bottom: 20px; }
+  .mvpPreview { padding: 16px 13px; gap: 13px; margin-bottom: 18px; }
+  .mvpPreview strong { font-size: 16px; line-height: 1.3; }
+  .mvpPreview small { font-size: 8px; letter-spacing: .8px; }
+  .playIcon { flex-basis: 40px; height: 40px; font-size: 14px; }
+  .videoArrow { font-size: 21px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .artOrbit, .logoFrame, .artChip, .spark, .canvasSpark,
+  .servicePanel .book, .servicePanel .serviceSpark,
+  .servicePanel .peerArt span, .servicePanel .reportArt > span { animation: none !important; }
+}
