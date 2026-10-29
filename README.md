@@ -74,6 +74,20 @@ Con el `.env` local, DNS, TLS y autenticación SMTP pasaron. El servidor SMTP ac
 
 ## Contenido y medición
 
-Se mantienen identidad visual, Servicios con preselección y detalles accesibles, Nosotros y los tres logos originales de Aliados. AulaLista IA está disponible para demo; las otras líneas conservan su alcance/disponibilidad por confirmar. Las animaciones respetan movimiento reducido. Los eventos son locales, sin Google Analytics ni datos del formulario. Las UTM permitidas se conservan en sessionStorage y no se incluyen en los correos.
+Se mantienen identidad visual, Servicios con preselección y detalles accesibles, Nosotros y los tres logos originales de Aliados. AulaLista IA está disponible para demo; las otras líneas conservan su alcance/disponibilidad por confirmar. Las animaciones respetan movimiento reducido. Los eventos de interacción existentes siguen siendo locales y no incluyen datos del formulario. GA4 mide visitas únicamente con consentimiento analítico, como se explica abajo. Las UTM permitidas se conservan en sessionStorage y no se incluyen en los correos.
 
 Referencias: [SMTP en Vercel](https://vercel.com/kb/guide/serverless-functions-and-smtp), [Nodemailer SMTP](https://nodemailer.com/smtp) y guías locales de Next.js en `node_modules/next/dist/docs/`.
+
+## Google Analytics 4 y consentimiento
+
+Configurar en `.env` para desarrollo y en Vercel → Project → Settings → Environment Variables:
+
+```dotenv
+NEXT_PUBLIC_GA_ID=G-919EY3HVWT
+```
+
+Es un identificador público, disponible en el navegador. Asignarlo a Production; en Preview y Development dejarlo vacío para evitar mezclar pruebas con visitas reales, o usar una propiedad de pruebas. Es necesario volver a desplegar después de cambiarlo: Next.js incorpora las variables `NEXT_PUBLIC_` durante el build. Sin un ID válido no se muestran controles ni se carga GA4. Las variables SMTP siguen siendo privadas y necesarias solo para el formulario.
+
+El layout principal monta una única integración de `@next/third-parties/google`, sin snippets manuales ni Google Tag Manager. No se solicita `gtag.js`, no se envían pings de GA y no se crean cookies de GA antes de aceptar. Aceptar el formulario no autoriza analítica. La elección se guarda en `localStorage` (`edukole:analytics-consent:v1`); si el almacenamiento está bloqueado se aplica solo durante la visita. El botón «Cookies analíticas» permite cambiarla. Rechazar desactiva la recogida inmediatamente y elimina las cookies `_ga`/`_ga_*` accesibles del sitio; no borra datos ya recibidos por Google.
+
+GA registra las páginas automáticamente: no se envían pageviews manuales ni se conectan los eventos locales o datos del formulario. En el flujo web de GA4, revisar Medición mejorada → cambios de página basados en el historial. No agregar otra etiqueta GA4/GTM para este mismo ID. Verificar en una sesión nueva: sin decidir o tras rechazar no debe haber solicitudes a Google Analytics; tras aceptar debe aparecer una sola etiqueta `gtag/js?id=G-919EY3HVWT`. Comprobar Tiempo real en GA4 desde el despliegue publicado, sin bloqueadores.

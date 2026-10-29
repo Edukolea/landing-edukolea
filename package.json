@@ -9,10 +9,11 @@
     "perf:preview": "npm run build && next start --port 3005",
     "perf:verify": "node scripts/verify-production.mjs",
     "smtp:verify": "node scripts/check-smtp.mjs",
-    "test": "node scripts/verify-demo.mjs && node scripts/verify-contact.mjs && node scripts/verify-measurement.mjs",
+    "test": "node scripts/verify-demo.mjs && node scripts/verify-contact.mjs && node scripts/verify-measurement.mjs && node scripts/verify-analytics.mjs",
     "lint": "eslint"
   },
   "dependencies": {
+    "@next/third-parties": "^16.4.3",
     "next": "16.4.3",
     "nodemailer": "^10.2.1",
     "react": "19.3.0",
