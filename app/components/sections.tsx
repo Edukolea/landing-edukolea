@@ -137,7 +137,7 @@ export function Services() {
             </h2>
           </div>
           <p>
-            Tres líneas educativas.
+            Tres líneas educativas.{" "}
             <br />
             Un mismo punto de partida: tu aula.
           </p>
@@ -209,6 +209,19 @@ export function Services() {
                   )}
                 </div>
               </div>
+              {index === 0 && (
+                <a
+                  className={styles.mvpPreview}
+                  href="https://www.youtube.com/watch?v=OoY5uN0cuL0"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Ver el MVP de AulaLista IA en YouTube (abre en otra pestaña)"
+                >
+                  <span className={styles.playIcon} aria-hidden="true">▶</span>
+                  <span><small>DEL PROPÓSITO A LA PRÁCTICA</small><strong>Mira AulaLista IA en acción</strong><span>Conoce nuestro MVP en video · YouTube</span></span>
+                  <span className={styles.videoArrow} aria-hidden="true">↗</span>
+                </a>
+              )}
               <details className={styles.serviceDetails}>
                 <summary>
                   Explorar {service.name}
