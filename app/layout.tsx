@@ -46,7 +46,7 @@ export default function RootLayout({
     <html lang="es">
       <body>
         {children}
-        <AnalyticsConsent gaId={process.env.NEXT_PUBLIC_GA_ID} />
+        <AnalyticsConsent gaId="G-919EY3HVVT" />
       </body>
     </html>
   );

@@ -80,13 +80,7 @@ Referencias: [SMTP en Vercel](https://vercel.com/kb/guide/serverless-functions-a
 
 ## Google Analytics 4 y consentimiento
 
-Configurar en `.env` para desarrollo y en Vercel → Project → Settings → Environment Variables:
-
-```dotenv
-NEXT_PUBLIC_GA_ID=G-919EY3HVWT
-```
-
-Es un identificador público, disponible en el navegador. Asignarlo a Production; en Preview y Development dejarlo vacío para evitar mezclar pruebas con visitas reales, o usar una propiedad de pruebas. Es necesario volver a desplegar después de cambiarlo: Next.js incorpora las variables `NEXT_PUBLIC_` durante el build. Sin un ID válido no se muestran controles ni se carga GA4. Las variables SMTP siguen siendo privadas y necesarias solo para el formulario.
+El ID público `G-919EY3HVVT` está configurado en el layout, por lo que no depende de variables de entorno. Se aplica también en desarrollo y vistas previas si se acepta la analítica. Es necesario desplegar el cambio para que llegue al sitio publicado. Las variables SMTP siguen siendo privadas y necesarias solo para el formulario.
 
 El layout principal monta una única integración de `@next/third-parties/google`, sin snippets manuales ni Google Tag Manager. No se solicita `gtag.js`, no se envían pings de GA y no se crean cookies de GA antes de aceptar. Aceptar el formulario no autoriza analítica. La elección se guarda en `localStorage` (`edukole:analytics-consent:v1`); si el almacenamiento está bloqueado se aplica solo durante la visita. El botón «Cookies analíticas» permite cambiarla. Rechazar desactiva la recogida inmediatamente y elimina las cookies `_ga`/`_ga_*` accesibles del sitio; no borra datos ya recibidos por Google.
 
